@@ -45,11 +45,9 @@ end
 --------------------------------------------------------------
 
 --ОБНОВЛЕНИЕ--
-   update = {
-		needupdate = false,
-		version = "beta 1.0.0",
-		updateText = "Нажмите на \"Проверить обновление\""
-	}
+if not imgui.update then
+  imgui.update = { needupdate = false, updateText = "Нажмите на \"Проверить обновление\"", version = "beta 1.1.0" }
+end
 ---------------------------
 	
 --СПИСОК ТЕМ ДЛЯ МЕНЮ ХЕЛПЕРА--
@@ -59,25 +57,25 @@ local colorListBuffer = new["const char*"][#colorList](colorList)
 --------------------------------------------------------------
 
 --УСТАВЫ--
-        local result = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Phoenix.txt").text
-        local result1 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Tucson.txt").text
-        local result2 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Scottdale.txt").text
-        local result3 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Chandler.txt").text
-        local result4 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Brainburg.txt").text
-        local result5 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Saintrose.txt").text
-        local result6 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Mesa.txt").text
-        local result7 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Red-Rock.txt").text
-        local result8 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Yuma.txt").text
-        local result9 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Surprise.txt").text
-        local result10 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Prescott.txt").text
-        local result11 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Glendale.txt").text
-        local result12 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Kingman.txt").text
-        local result13 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Winslow.txt").text
-        local result14 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Payson.txt").text
-        local result15 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Show%20Low.txt").text
-        local result16 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Casa-Grande.txt").text
-        local result17 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Page.txt").text
-        local result18 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Sun-City.txt").text
+        local result = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Phoenix.txt")
+        local result1 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Tucson.txt")
+        local result2 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Scottdale.txt")
+        local result3 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Chandler.txt")
+        local result4 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Brainburg.txt")
+        local result5 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Saintrose.txt")
+        local result6 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Mesa.txt")
+        local result7 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Red-Rock.txt")
+        local result8 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Yuma.txt")
+        local result9 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Surprise.txt")
+        local result10 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Prescott.txt")
+        local result11 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Glendale.txt")
+        local result12 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Kingman.txt")
+        local result13 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Winslow.txt")
+        local result14 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Payson.txt")
+        local result15 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Show%20Low.txt")
+        local result16 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Casa-Grande.txt")
+        local result17 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Page.txt")
+        local result18 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Sun-City.txt")
         
 ------------------
 
@@ -233,79 +231,135 @@ if CurrentTab == 1 then
          --авто определение устава--
         elseif CurrentTab == 2 then
         if server == "Arizona RP | Glendale | X4 Payday!" or "Arizona RP | Glendale" then
-        imgui.TextWrapped(result)
+        for line in result.text:gmatch("[^\r\n]+") do
+                imgui.TextWrapped(line)
         end
+        end
+        
         elseif CurrentTab == 2 then
         if server == "Arizona RP | Tucson | X4 Payday!" or "Arizona RP | Tucson" then
-        imgui.TextWrapped(result1)
+        for line in result1.text:gmatch("[^\r\n]+") do
+                imgui.TextWrapped(line)
         end
+        end
+        
         elseif CurrentTab == 2 then
         if server == "Arizona RP | Scottdale | X4 Payday!" or "Arizona RP | Scottdale" then
-        imgui.TextWrapped(result2)
+        for line in result2.text:gmatch("[^\r\n]+") do
+                imgui.TextWrapped(line)
         end
+        end
+        
         elseif CurrentTab == 2 then
         if server == "Arizona RP | Chandler | X4 Payday!" or "Arizona RP | Chandler" then
-        imgui.TextWrapped(result3)
+        for line in result3.text:gmatch("[^\r\n]+") do
+                imgui.TextWrapped(line)
         end
+        end
+        
         elseif CurrentTab == 2 then
         if server == "Arizona RP | Brainburg | X4 Payday!" or "Arizona RP | Brainbirg" then
-        imgui.TextWrapped(result4)
+        for line in result4.text:gmatch("[^\r\n]+") do
+                imgui.TextWrapped(line)
         end
+        end
+        
         elseif CurrentTab == 2 then
         if server == "Arizona RP | Saintrose | X4 Payday!" or "Arizona RP | Saintrose" then
-        imgui.TextWrapped(result5)
+        for line in result5.text:gmatch("[^\r\n]+") do
+                imgui.TextWrapped(line)
         end
+        end
+        
         elseif CurrentTab == 2 then
         if server == "Arizona RP | Mesa | X4 Payday!" or "Arizona RP | Mesa" then
-        imgui.TextWrapped(result6)
+        for line in result6.text:gmatch("[^\r\n]+") do
+                imgui.TextWrapped(line)
         end
+        end
+        
         elseif CurrentTab == 2 then
         if server == "Arizona RP | Red-Rock | X4 Payday!" or "Arizona RP | Red-Rock" then
-        imgui.TextWrapped(result7)
+        for line in result7.text:gmatch("[^\r\n]+") do
+                imgui.TextWrapped(line)
         end
+        end
+        
         elseif CurrentTab == 2 then
         if server == "Arizona RP | Yuma | X4 Payday!" or "Arizona RP | Yuma" then
-        imgui.TextWrapped(result8)
+        for line in result8.text:gmatch("[^\r\n]+") do
+                imgui.TextWrapped(line)
         end
+        end
+        
         elseif CurrentTab == 2 then
         if server == "Arizona RP | Surprise | X4 Payday!" or "Arizona RP | Surprise" then
-        imgui.TextWrapped(result9)
+        for line in result9.text:gmatch("[^\r\n]+") do
+                imgui.TextWrapped(line)
         end
+        end
+        
         elseif CurrentTab == 2 then
         if server == "Arizona RP | Prescott | X4 Payday!" or "Arizona RP | Prescott" then
-        imgui.TextWrapped(result10)
+        for line in result10.text:gmatch("[^\r\n]+") do
+                imgui.TextWrapped(line)
         end
+        end
+        
         elseif CurrentTab == 2 then
         if server == "Arizona RP | Glendale | X4 Payday!" or "Arizona RP | Glendale" then
-        imgui.TextWrapped(result11)
+        for line in result11.text:gmatch("[^\r\n]+") do
+                imgui.TextWrapped(line)
         end
+        end
+        
         elseif CurrentTab == 2 then
         if server == "Arizona RP | Kingman | X4 Payday!" or "Arizona RP | Kingman" then
-        imgui.TextWrapped(result12)
+        for line in result12.text:gmatch("[^\r\n]+") do
+                imgui.TextWrapped(line)
         end
+        end
+        
         elseif CurrentTab == 2 then
         if server == "Arizona RP | Winslow | X4 Payday!" or "Arizona RP | Winslow" then
-        imgui.TextWrapped(result13)
+        for line in result13.text:gmatch("[^\r\n]+") do
+                imgui.TextWrapped(line)
         end
+        end
+        
         elseif CurrentTab == 2 then
         if server == "Arizona RP | Payson | X4 Payday!" or "Arizona RP | Payson" then
-        imgui.TextWrapped(result14)
+        for line in result14.text:gmatch("[^\r\n]+") do
+                imgui.TextWrapped(line)
         end
+        end
+        
         elseif CurrentTab == 2 then
         if server == "Arizona RP | Show Low | X4 Payday!" or "Arizona RP | Show Low" then
-        imgui.TextWrapped(result15)
+        for line in result15.text:gmatch("[^\r\n]+") do
+                imgui.TextWrapped(line)
         end
+        end
+        
         elseif CurrentTab == 2 then
         if server == "Arizona RP | Casa-Grande | X4 Payday!" or "Arizona RP | Casa-Grande" then
-        imgui.TextWrapped(result16)
+        for line in result16.text:gmatch("[^\r\n]+") do
+                imgui.TextWrapped(line)
         end
+        end
+        
         elseif CurrentTab == 2 then
         if server == "Arizona RP | Page | X4 Payday!" or "Arizona RP | Page" then
-        imgui.TextWrapped(result17)
+        for line in result17.text:gmatch("[^\r\n]+") do
+                imgui.TextWrapped(line)
         end
+        end
+        
         elseif CurrentTab == 2 then
         if server == "Arizona RP | Sun-City | X4 Payday!" or "Arizona RP | Sun-City" then
-        imgui.TextWrapped(result14)
+        for line in result18.text:gmatch("[^\r\n]+") do
+                imgui.TextWrapped(line)
+        end
         end
         ----------------------------------------------
         
@@ -331,7 +385,7 @@ imgui.TextWrapped(u8"Автор: @UxyOy [Telegram]")
 			if imgui.Combo(u8"Темы",colorListNumber,colorListBuffer, #colorList) then
             theme[colorListNumber[0]+1].change()
             end
-            -- Предполагаем, что u8 - это функция для обработки UTF-8 строк, а request - это библиотека для HTTP запросов
+
 if imgui.update.needupdate then
     local centered_x = (imgui.GetWindowWidth() - imgui.CalcTextSize(u8("Обновиться")).x) / 2
     imgui.SetCursorPosX(centered_x)
@@ -352,7 +406,7 @@ else
     local centered_x = (imgui.GetWindowWidth() - imgui.CalcTextSize(u8("Проверить обновление")).x) / 2
     imgui.SetCursorPosX(centered_x)
     if imgui.Button(u8("Проверить обновление")) then
-        local response = request.get("https://raw.githubusercontent.com/BostKing102/mobiletools/main/test.json")
+        local response = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/test.json")
         if response.status_code == 200 then
             -- Предполагаем, что тело ответа в формате JSON и содержит поле "version"
             local data = json.decode(response.text) -- Предполагаем, что есть библиотека JSON
