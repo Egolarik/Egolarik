@@ -46,7 +46,7 @@ end
 
 --ОБНОВЛЕНИЕ--
 if not imgui.update then
-  imgui.update = { needupdate = false, updateText = "Нажмите на \"Проверить обновление\"", version = "beta 1.1.0" }
+  imgui.update = { needupdate = false, updateText = "Нажмите на \"Проверить обновление\"", version = "beta 1.0.0" }
 end
 ---------------------------
 	
@@ -390,7 +390,7 @@ if imgui.update.needupdate then
     local centered_x = (imgui.GetWindowWidth() - imgui.CalcTextSize(u8("Обновиться")).x) / 2
     imgui.SetCursorPosX(centered_x)
     if imgui.Button(u8("Обновиться")) then
-        local response = request.get("https://raw.githubusercontent.com/BostKing102/mobiletools/main/mobiletools.luac")
+        local response = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/AutoSchool-Helper.lua")
         if response.status_code == 200 then
             local file = io.open("AutoSchool-Helper.lua", "wb")
             if file then
@@ -468,6 +468,17 @@ function cmd_givelicense(id)
         end
 end
 --------------
+
+--рестарт скрипта при краше--
+function onScriptTerminate(script, game_quit) 
+    if script == thisScript() and not game_quit then 
+    local id = select(2, sampGetPlayerIdByCharHandle(PLAYER_PED))
+    local name = sampGetPlayerNickname(id)
+    sampAddChatMessage("Эх, дорогой мой "..name..", в этот раз я спас скрипт, но в следующий раз незнаю...", -1)
+    thisScript():reload() 
+    end 
+end
+--------------------
 
 --выгнать посетителя
 function cmd_expel(id, reason)
