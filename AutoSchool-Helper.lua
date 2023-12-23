@@ -20,7 +20,6 @@ encoding.default = "CP1251"
 local toggled = false
 local inputField = imgui.new.char[256]()
 local WinState, WinState = new.bool(), new.bool()
-local u8 = encoding.UTF8
 ------------------------------------------------------------------------
 
 ------------------------API SCRIPT MANAGER-------------------------
@@ -51,7 +50,7 @@ end
 ---------------------------
 	
 --СПИСОК ТЕМ ДЛЯ МЕНЮ ХЕЛПЕРА--
-local colorList = {u8"Красная", u8"Зелёная",u8"Синяя", u8"Темная", u8"Фиолетовая", u8"Фиолетовая #2", u8"Красная #2"}
+local colorList = {"Красная", "Зелёная","Синяя", "Темная", "Фиолетовая", "Фиолетовая #2", "Красная #2"}
 local colorListNumber = new.int(ini.cfg.theme - 1)
 local colorListBuffer = new["const char*"][#colorList](colorList)
 --------------------------------------------------------------
@@ -158,7 +157,7 @@ end
 --отрисовка мимгуи
 imgui.OnFrame(function() return WinState[0] end, function(player)
     imgui.SetNextWindowSize(imgui.ImVec2(490, 275))
-    imgui.Begin(u8"AutoSchool Helper", WinState)
+    imgui.Begin("AutoSchool Helper", WinState)
     --применения декора из кфг--
     decor()
     ini.cfg.theme = colorListNumber[0]+1
@@ -166,15 +165,15 @@ imgui.OnFrame(function() return WinState[0] end, function(player)
     ------------------------------------------------
 
 --создание кнопок--
-if imgui.Button(fa("graduation_cap") .. u8" Лекции", imgui.ImVec2(118, 28)) then
+if imgui.Button(fa("graduation_cap") .. "Лекции", imgui.ImVec2(118, 28)) then
 CurrentTab = 1
 end
 
-if imgui.Button(fa("file") .. u8" Устав", imgui.ImVec2(118, 28)) then
+if imgui.Button(fa("file") .. "Устав", imgui.ImVec2(118, 28)) then
 CurrentTab = 2 
 end
 
-if imgui.Button(fa("gears") .. u8" Настройки", imgui.ImVec2(118, 28)) then
+if imgui.Button(fa("gears") .. "Настройки", imgui.ImVec2(118, 28)) then
 CurrentTab = 3
 end
 ---------------------------------
@@ -185,45 +184,45 @@ imgui.Separator()
 
 --код кнопки лекция
 if CurrentTab == 1 then
-    imgui.TextWrapped(u8"Открыта первая вкладка Лекции")
-    if imgui.Button(u8"Лекция о рабочем дне") then
+    imgui.TextWrapped("Открыта первая вкладка Лекции")
+    if imgui.Button("Лекция о рабочем дне") then
         lua_thread.create(function()
-        sampSendChat("Приветствую всех на лекции о рабочем дне.")
+        sampSendChat(monet_utf8_to_cp1251"Приветствую всех на лекции о рабочем дне.")
             wait(1500)
-        sampSendChat("Сотрудники в рабочее время обязаны находиться в офисе ГЦЛ в форме.")
+        sampSendChat(monet_utf8_to_cp1251"Сотрудники в рабочее время обязаны находиться в офисе ГЦЛ в форме.")
             wait(1500)
-        sampSendChat("За прогул рабочего дня сотрудник получит выговор или увольнение.")
+        sampSendChat(monet_utf8_to_cp1251"За прогул рабочего дня сотрудник получит выговор или увольнение.")
             wait(1500)
-        sampSendChat("С понедельника по пятницу рабочий день идёт с 10:00 до 20:00.")
+        sampSendChat(monet_utf8_to_cp1251"С понедельника по пятницу рабочий день идёт с 10:00 до 20:00.")
             wait(1500)
-        sampSendChat("В выходные дни с 10:00 до 19:00.")
+        sampSendChat(monet_utf8_to_cp1251"В выходные дни с 10:00 до 19:00.")
             wait(1500)
-        sampSendChat("В нерабочее время или отпросившись сотрудник может покинуть офис ГЦЛ.")
+        sampSendChat(monet_utf8_to_cp1251"В нерабочее время или отпросившись сотрудник может покинуть офис ГЦЛ.")
             wait(1500)
-        sampSendChat("Но перед этим обязательно нужно снять форму.")
+        sampSendChat(monet_utf8_to_cp1251"Но перед этим обязательно нужно снять форму.")
             wait(1500)
-        sampSendChat("На этом у меня все, спасибо за внимание.")
+        sampSendChat(monet_utf8_to_cp1251"На этом у меня все, спасибо за внимание.")
             wait(1500)
-        sampSendChat("Всем за работу, всем удачного дня.")
+        sampSendChat(monet_utf8_to_cp1251"Всем за работу, всем удачного дня.")
         end)
    end
-    if imgui.Button(u8"Лекция о субординации") then
+    if imgui.Button("Лекция о субординации") then
         lua_thread.create(function()
-        sampSendChat("Приветствую всех на лекции о субординации.")
+        sampSendChat(monet_utf8_to_cp1251"Приветствую всех на лекции о субординации.")
             wait(1500)
-        sampSendChat("Субординация - правила подчинения младших по званию к старшим по званию, уважение, отношение к ним.")
+        sampSendChat(monet_utf8_to_cp1251"Субординация - правила подчинения младших по званию к старшим по званию, уважение, отношение к ним.")
             wait(1500)
-        sampSendChat("То есть, младшие сотрудники должны выполнять приказы начальства.")
+        sampSendChat(monet_utf8_to_cp1251"То есть, младшие сотрудники должны выполнять приказы начальства.")
             wait(1500)
-        sampSendChat("Кто ослушается - получит выговор, но сперва устный.")
+        sampSendChat(monet_utf8_to_cp1251"Кто ослушается - получит выговор, но сперва устный.")
             wait(1500)
-        sampSendChat("Вы должны с уважением относится к начальству на Вы")
+        sampSendChat(monet_utf8_to_cp1251"Вы должны с уважением относится к начальству на Вы")
             wait(1500)
-        sampSendChat("не нарушайте правила и не нарушайте субординацию, дабы не получить наказание.")
+        sampSendChat(monet_utf8_to_cp1251"не нарушайте правила и не нарушайте субординацию, дабы не получить наказание.")
             wait(1500)
-        sampSendChat("На этом у меня все, спасибо за внимание.")
+        sampSendChat(monet_utf8_to_cp1251"На этом у меня все, спасибо за внимание.")
             wait(1500)
-        sampSendChat("Все за работу, всем удачного дня.")
+        sampSendChat(monet_utf8_to_cp1251"Все за работу, всем удачного дня.")
         end)
    end
    --------------
@@ -365,31 +364,31 @@ if CurrentTab == 1 then
         
  --3 кнопка настройки--
 elseif CurrentTab == 3 then
-imgui.TextWrapped(u8"Автор: @UxyOy [Telegram]")
-        imgui.TextWrapped(u8"Версия скрипта: 1.0")
-        imgui.TextWrapped(u8"Писать по проблемам, предложениям мне в [Telegram]")
-        if imgui.Button(u8"Связь с разработчиком") then
+imgui.TextWrapped("Автор: @UxyOy [Telegram]")
+        imgui.TextWrapped("Версия скрипта: 1.0")
+        imgui.TextWrapped("Писать по проблемам, предложениям мне в [Telegram]")
+        if imgui.Button("Связь с разработчиком") then
         gta._Z12AND_OpenLinkPKc("https://t.me/UxyOy")
         end
-        if imgui.Button(u8"Перезагрузить Скрипт") then
+        if imgui.Button("Перезагрузить Скрипт") then
 				lua_thread.create(function() wait(5) thisScript():reload() end)
 	    end
 				imgui.ShowCursor = false
-				if imgui.IsItemHovered() then imgui.SetTooltip(u8"Кликните ЛКМ, чтобы перезагрузить скрипт")
+				if imgui.IsItemHovered() then imgui.SetTooltip("Кликните ЛКМ, чтобы перезагрузить скрипт")
 		end
 			imgui.SameLine()
-			if imgui.Button(u8"Выгрузить Скрипт") then
+			if imgui.Button("Выгрузить Скрипт") then
 				lua_thread.create(function() wait(1) thisScript():unload() end)
 				imgui.ShowCursor = false
-		end
-			if imgui.Combo(u8"Темы",colorListNumber,colorListBuffer, #colorList) then
+		    end
+			if imgui.Combo("Темы",colorListNumber,colorListBuffer, #colorList) then
             theme[colorListNumber[0]+1].change()
             end
 
 if imgui.update.needupdate then
-    local centered_x = (imgui.GetWindowWidth() - imgui.CalcTextSize(u8("Обновиться")).x) / 2
+    local centered_x = (imgui.GetWindowWidth() - imgui.CalcTextSize("Обновиться").x) / 2
     imgui.SetCursorPosX(centered_x)
-    if imgui.Button(u8("Обновиться")) then
+    if imgui.Button("Обновиться") then
         local response = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/AutoSchool-Helper.lua")
         if response.status_code == 200 then
             local file = io.open("AutoSchool-Helper.lua", "wb")
@@ -398,14 +397,14 @@ if imgui.update.needupdate then
                 file:close()
                 thisScript():reload()
             else
-                sampAddChatMessage("Упс, ошибочка, сообщи автору скрипта, оно в настройках", -1)
+                sampAddChatMessage(monet_utf8_to_cp1251"Упс, ошибочка, сообщи автору скрипта, оно в настройках", -1)
             end
         end
     end
 else
-    local centered_x = (imgui.GetWindowWidth() - imgui.CalcTextSize(u8("Проверить обновление")).x) / 2
+    local centered_x = (imgui.GetWindowWidth() - imgui.CalcTextSize("Проверить обновление").x) / 2
     imgui.SetCursorPosX(centered_x)
-    if imgui.Button(u8("Проверить обновление")) then
+    if imgui.Button("Проверить обновление") then
         local response = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/test.json")
         if response.status_code == 200 then
             -- Предполагаем, что тело ответа в формате JSON и содержит поле "version"
@@ -425,10 +424,10 @@ end
 -- Уведомление пользователя об обновлениях
 if imgui.update.updateText ~= "" then
     imgui.Separator()
-    local updateTextWidth = imgui.CalcTextSize(u8(imgui.update.updateText)).x
+    local updateTextWidth = imgui.CalcTextSize(imgui.update.updateText).x
     local centered_x = (imgui.GetWindowWidth() - updateTextWidth) / 2
     imgui.SetCursorPosX(centered_x)
-    imgui.Text(u8(imgui.update.updateText))
+    imgui.Text(imgui.update.updateText)
     imgui.Separator()
 end
 --------------------------
@@ -444,41 +443,30 @@ function cmd_givelicense(id)
         sampAddChatMessage("Введи айди игрока: {FFFFFF}/lic [ID]", 0x318CE7FF)
     else
         lua_thread.create(function()
-            sampSendChat("/givelicense "..id)
-            sampSendChat("/todo Хорошо, минуточку*повернув КПК в свою сторону и что-то выбирая на нем")
+            sampSendChat(monet_utf8_to_cp1251"/givelicense "..id)
+            sampSendChat(monet_utf8_to_cp1251"/todo Хорошо, минуточку*повернув КПК в свою сторону и что-то выбирая на нем")
                 wait(1500)
-            sampSendChat("/do На КПК выбрана нужна лицензия, и показана соответствующая цена.")
+            sampSendChat(monet_utf8_to_cp1251"/do На КПК выбрана нужна лицензия, и показана соответствующая цена.")
                 wait(1500)
-            sampSendChat("/me подтверждает выбор лицензии")
+            sampSendChat(monet_utf8_to_cp1251"/me подтверждает выбор лицензии")
                 wait(1500)
-            sampSendChat("/do КПК печатает чек.")
+            sampSendChat(monet_utf8_to_cp1251"/do КПК печатает чек.")
                 wait(1500)
-            sampSendChat("/do Чек готов.")
+            sampSendChat(monet_utf8_to_cp1251"/do Чек готов.")
                 wait(1500)
-            sampSendChat("/do На чеке написана сумма оплаты.")
+            sampSendChat(monet_utf8_to_cp1251"/do На чеке написана сумма оплаты.")
                 wait(1500)
-            sampSendChat("/me передал чек человеку напротив")
+            sampSendChat(monet_utf8_to_cp1251"/me передал чек человеку напротив")
                 wait(1500)
-            sampSendChat("/me вел данные гражданина в КПК")
+            sampSendChat(monet_utf8_to_cp1251"/me вел данные гражданина в КПК")
                 wait(1500)
-            sampSendChat("/do Данные введены верно.")
+            sampSendChat(monet_utf8_to_cp1251"/do Данные введены верно.")
                 wait(1500)
-            sampSendChat("Всего хорошего, приходите еще!")
+            sampSendChat(monet_utf8_to_cp1251"Всего хорошего, приходите еще!")
             end)
         end
 end
 --------------
-
---рестарт скрипта при краше--
-function onScriptTerminate(script, game_quit) 
-    if script == thisScript() and not game_quit then 
-    local id = select(2, sampGetPlayerIdByCharHandle(PLAYER_PED))
-    local name = sampGetPlayerNickname(id)
-    sampAddChatMessage("Эх, дорогой мой "..name..", в этот раз я спас скрипт, но в следующий раз незнаю...", -1)
-    thisScript():reload() 
-    end 
-end
---------------------
 
 --выгнать посетителя
 function cmd_expel(id, reason)
@@ -486,10 +474,10 @@ function cmd_expel(id, reason)
         sampAddChatMessage("Введи айди игрока: {FFFFFF}/expel [ID] [REASON]", 0x318CE7FF )
     else
         lua_thread.create(function()
-        sampSendChat("/me резкими движениями рук заломил руки человека, повёл его за собой к выходу")
+        sampSendChat(monet_utf8_to_cp1251"/me резкими движениями рук заломил руки человека, повёл его за собой к выходу")
             wait(1500)
-        sampSendChat("/me открыл дверь здания, после чего вывел нарушителя на улицу")
-        sampSendChat("/expel "..id.." "..reason)
+        sampSendChat(monet_utf8_to_cp1251"/me открыл дверь здания, после чего вывел нарушителя на улицу")
+        sampSendChat(monet_utf8_to_cp1251"/expel "..id.." "..reason)
         end)
     end
 end
@@ -498,9 +486,9 @@ end
 --приветствие--
 function cmd_om()
     lua_thread.create(function()
-            sampSendChat("Доброго времени суток, меня зовут ".. name ..". Чем могу вам помочь?")
+            sampSendChat(monet_utf8_to_cp1251"Доброго времени суток, меня зовут ".. name ..". Чем могу вам помочь?")
                 wait(1500)
-            sampSendChat("/do На груди висит бейдж, на котором написано: " .. rank .. "-" .. name)
+            sampSendChat(monet_utf8_to_cp1251"/do На груди висит бейдж, на котором написано: " .. rank .. "-" .. name)
     end)
 end
 -------------------------
