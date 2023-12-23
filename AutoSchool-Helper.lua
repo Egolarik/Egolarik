@@ -391,7 +391,7 @@ if imgui.update.needupdate then
     if imgui.Button("Обновиться") then
         local response = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/AutoSchool-Helper.lua")
         if response.status_code == 200 then
-            local file = io.open("AutoSchool-Helper.lua", "wb")
+            local file = io.open(thisScript().filename, "wb")
             if file then
                 file:write(response.text)
                 file:close()
