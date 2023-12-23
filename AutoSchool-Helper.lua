@@ -469,17 +469,6 @@ function cmd_givelicense(id)
 end
 --------------
 
---рестарт скрипта при краше--
-function onScriptTerminate(script, game_quit) 
-    if script == thisScript() and not game_quit then 
-    local id = select(2, sampGetPlayerIdByCharHandle(PLAYER_PED))
-    local name = sampGetPlayerNickname(id)
-    sampAddChatMessage("Эх, дорогой мой "..name..", в этот раз я спас скрипт, но в следующий раз незнаю...", -1)
-    thisScript():reload() 
-    end 
-end
---------------------
-
 --выгнать посетителя
 function cmd_expel(id, reason)
     if id == "" and reason == "" then
