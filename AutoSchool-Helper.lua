@@ -49,7 +49,7 @@ end
 
 --ОБНОВЛЕНИЕ--
 if not imgui.update then
-  imgui.update = { needupdate = false, updateText = "Нажмите на \"Проверить обновление\"", version = "beta 1.1.2" }
+  imgui.update = { needupdate = false, updateText = "Нажмите на \"Проверить обновление\"", version = "beta 1.2.0" }
 end
 ---------------------------
 	
@@ -85,9 +85,7 @@ local colorListBuffer = new["const char*"][#colorList](colorList)
 --ОПРЕДЕЛЕНИЕ РАНГА--
 function sampev.onShowDialog(id, style, title, button1, button2, text)
   if id == 235 and title == "{BFBBBA}Основная статистика" then
-      if line:find("{FFFFFF}Должность: {B83434}(.+)%((%d+)%)") then
-        rank = line:match("{FFFFFF}Должность: {B83434}(.+)%((%d+)%)")
-     end
+      rank, rank_number = text:match("{FFFFFF}Должность: {B83434}(.+)%((%d+)%)")
   end
 end
 ----------------------------------------
