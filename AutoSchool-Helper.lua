@@ -1,5 +1,5 @@
--- РёСЃС…РѕРґРЅС‹Р№ РєРѕРґ РѕС‚РєСЂС‹С‚, Р°РІС‚РѕСЂ РЅРµ РїСЂРѕС‚РёРІ РґР»СЏ РёР·РјРµРЅРµРЅРёСЏ.
-------------------------Р‘РёР±Р»РёРѕС‚РµРєРё------------------------------
+-- исходный код открыт, автор не против для изменения.
+------------------------Библиотеки------------------------------
 
 local encoding = require("encoding")
 local sampev = require("lib.samp.events")
@@ -13,18 +13,19 @@ local json = require("cjson")
 
 function sampev.onSendSpawn()
 		sampSendChat("/stats")
-		sampAddChatMessage("[UxyOy AutoSchool Helper]: {FFFFFF}РЎРєСЂРёРїС‚ СѓСЃРїРµС€РЅРѕ Р·Р°РіСЂСѓР·РёР»СЃСЏ", 9109759)
-		sampAddChatMessage("[UxyOy AutoSchool Helper]: {FFFFFF}РђРІС‚РѕСЂС‹:t.me/UxyOy", 9109759)
-		sampAddChatMessage("[UxyOy AutoSchool Helper]: {FFFFFF}Р§С‚РѕР±С‹ РїРѕСЃРјРѕС‚СЂРµС‚СЊ РєРѕРјРјР°РЅРґС‹,РІРІРµРґРёС‚Рµ /helper and /helpers", 9109759)
+		sampAddChatMessage("[UxyOy AutoSchool Helper]: {FFFFFF}Скрипт успешно загрузился", 9109759)
+		sampAddChatMessage("[UxyOy AutoSchool Helper]: {FFFFFF}Авторы:t.me/UxyOy", 9109759)
+		sampAddChatMessage("[UxyOy AutoSchool Helper]: {FFFFFF}Чтобы посмотреть комманды,введите /helper and /helpers", 9109759)
 end
 
---РџР•Р Р•РњР•РќРќР«Р•--
+--ПЕРЕМЕННЫЕ--
 local gta = ffi.load("GTASA")
 local CurrentTab = 0
 local fa = faicons
 local new, str, sizeof = imgui.new, ffi.string, ffi.sizeof
 encoding.default = "CP1251"
 local toggled = false
+local u8 = encoding.UTF8
 name = sampGetPlayerNickname(select(2, sampGetPlayerIdByCharHandle(playerPed)))
 local inputField = imgui.new.char[256]()
 local WinState, cmd = new.bool(), new.bool()
@@ -39,7 +40,7 @@ EXPORTS = {
    }
 -------------------------------------------------------------------------------------
 
---РЎРћРҐР РђРќР•РќРР• РўР•РњР«--
+--СОХРАНЕНИЕ ТЕМЫ--
 local ini = inicfg.load({
     cfg =
     {
@@ -47,24 +48,24 @@ theme = 1
     }}, "AutoSchool.ini")
 -------------------------------------
 
---РћРџР Р•Р”Р•Р›Р•РќРР• РђР™Р”Р РЎ РЎР•Р Р’Р•Р РћРњ--
+--ОПРЕДЕЛЕНИЕ АЙДИ С СЕРВЕРОМ--
 function sampev.onInitGame(id, server)
 end
 --------------------------------------------------------------
 
---РћР‘РќРћР’Р›Р•РќРР•--
+--ОБНОВЛЕНИЕ--
 if not imgui.update then
-  imgui.update = { needupdate = false, updateText = "РќР°Р¶РјРёС‚Рµ РЅР° \"РџСЂРѕРІРµСЂРёС‚СЊ РѕР±РЅРѕРІР»РµРЅРёРµ\"", version = "beta 1.2.1" }
+  imgui.update = { needupdate = false, updateText = "Нажмите на \"Проверить обновление\"", version = "beta 1.2.1" }
 end
 ---------------------------
 	
---РЎРџРРЎРћРљ РўР•Рњ Р”Р›РЇ РњР•РќР® РҐР•Р›РџР•Р Рђ--
-local colorList = {"РљСЂР°СЃРЅР°СЏ", "Р—РµР»С‘РЅР°СЏ","РЎРёРЅСЏСЏ", "РўРµРјРЅР°СЏ", "Р¤РёРѕР»РµС‚РѕРІР°СЏ", "Р¤РёРѕР»РµС‚РѕРІР°СЏ #2", "РљСЂР°СЃРЅР°СЏ #2"}
+--СПИСОК ТЕМ ДЛЯ МЕНЮ ХЕЛПЕРА--
+local colorList = {u8"Красная", u8"Зелёная",u8"Синяя", u8"Темная", u8"Фиолетовая", u8"Фиолетовая #2", u8"Красная #2"}
 local colorListNumber = new.int(ini.cfg.theme - 1)
 local colorListBuffer = new["const char*"][#colorList](colorList)
 --------------------------------------------------------------
 
---РЈРЎРўРђР’Р«--
+--УСТАВЫ--
         local result = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Phoenix.txt")
         local result1 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Tucson.txt")
         local result2 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Scottdale.txt")
@@ -86,7 +87,7 @@ local colorListBuffer = new["const char*"][#colorList](colorList)
         local result18 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Sun-City.txt")
 ------------------
 
---СЂРµРіРёСЃС‚СЂР°С†РёСЏ РєРѕРјР°РЅРґ--
+--регистрация команд--
 function main()
     while not isSampAvailable() do wait(100) end
     sampAddChatMessage(rank, -1)
@@ -103,7 +104,7 @@ function main()
 end
 ------------------------------------
 
---РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РёРєРѕРЅРѕРє СЃ С‚РµРјРѕР№--
+--инициализация иконок с темой--
 imgui.OnInitialize(function()
     imgui.GetIO().IniFilename = nil
     local config = imgui.ImFontConfig()
@@ -116,15 +117,15 @@ imgui.OnInitialize(function()
 end)
 ------------------------------------------------------
 
---СЃРѕС…СЂР°РЅРµРЅРёРµ РєС„Рі--
+--сохранение кфг--
 function cfg_save()
 inicfg.save(ini, "AutoSchool.ini")
 end
 -----------------------------
 
---РґРµРєРѕСЂ--
+--декор--
 function decor()
-    -- == Р”РµРєРѕСЂ С‡Р°СЃС‚СЊ == --
+    -- == Декор часть == --
     imgui.SwitchContext()
     local ImVec4 = imgui.ImVec4
     imgui.GetStyle().WindowPadding = imgui.ImVec2(5, 5)
@@ -150,26 +151,26 @@ function decor()
 end
 --------------
 
---РѕС‚СЂРёСЃРѕРІРєР° РјРёРјРіСѓРё
+--отрисовка мимгуи
 imgui.OnFrame(function() return WinState[0] end, function(player)
     imgui.SetNextWindowSize(imgui.ImVec2(490, 275))
-    imgui.Begin("AutoSchool Helper", WinState)
-    --РїСЂРёРјРµРЅРµРЅРёСЏ РґРµРєРѕСЂР° РёР· РєС„Рі--
+    imgui.Begin(u8"AutoSchool Helper", WinState)
+    --применения декора из кфг--
     decor()
     ini.cfg.theme = colorListNumber[0]+1
     cfg_save()
     ------------------------------------------------
 
---СЃРѕР·РґР°РЅРёРµ РєРЅРѕРїРѕРє--
-if imgui.Button(fa("graduation_cap") .. "Р›РµРєС†РёРё", imgui.ImVec2(118, 28)) then
+--создание кнопок--
+if imgui.Button(fa("graduation_cap") ..u8 "Лекции", imgui.ImVec2(118, 28)) then
 CurrentTab = 1
 end
 
-if imgui.Button(fa("file") .. "РЈСЃС‚Р°РІ", imgui.ImVec2(118, 28)) then
+if imgui.Button(fa("file") ..u8 "Устав", imgui.ImVec2(118, 28)) then
 CurrentTab = 2 
 end
 
-if imgui.Button(fa("gears") .. "РќР°СЃС‚СЂРѕР№РєРё", imgui.ImVec2(118, 28)) then
+if imgui.Button(fa("gears") ..u8 "Настройки", imgui.ImVec2(118, 28)) then
 CurrentTab = 3
 end
 ---------------------------------
@@ -178,52 +179,52 @@ imgui.Separator()
 
 
 
---РєРѕРґ РєРЅРѕРїРєРё Р»РµРєС†РёСЏ
+--код кнопки лекция
 if CurrentTab == 1 then
-    imgui.TextWrapped("РћС‚РєСЂС‹С‚Р° РїРµСЂРІР°СЏ РІРєР»Р°РґРєР° Р›РµРєС†РёРё")
-    if imgui.Button("Р›РµРєС†РёСЏ Рѕ СЂР°Р±РѕС‡РµРј РґРЅРµ") then
+    imgui.TextWrapped(u8"Открыта первая вкладка Лекции")
+    if imgui.Button(u8"Лекция о рабочем дне") then
         lua_thread.create(function()
-        sampSendChat(monet_utf8_to_cp1251"РџСЂРёРІРµС‚СЃС‚РІСѓСЋ РІСЃРµС… РЅР° Р»РµРєС†РёРё Рѕ СЂР°Р±РѕС‡РµРј РґРЅРµ.")
+        sampSendChat("Приветствую всех на лекции о рабочем дне.")
             wait(1500)
-        sampSendChat(monet_utf8_to_cp1251"РЎРѕС‚СЂСѓРґРЅРёРєРё РІ СЂР°Р±РѕС‡РµРµ РІСЂРµРјСЏ РѕР±СЏР·Р°РЅС‹ РЅР°С…РѕРґРёС‚СЊСЃСЏ РІ РѕС„РёСЃРµ Р“Р¦Р› РІ С„РѕСЂРјРµ.")
+        sampSendChat("Сотрудники в рабочее время обязаны находиться в офисе ГЦЛ в форме.")
             wait(1500)
-        sampSendChat(monet_utf8_to_cp1251"Р—Р° РїСЂРѕРіСѓР» СЂР°Р±РѕС‡РµРіРѕ РґРЅСЏ СЃРѕС‚СЂСѓРґРЅРёРє РїРѕР»СѓС‡РёС‚ РІС‹РіРѕРІРѕСЂ РёР»Рё СѓРІРѕР»СЊРЅРµРЅРёРµ.")
+        sampSendChat("За прогул рабочего дня сотрудник получит выговор или увольнение.")
             wait(1500)
-        sampSendChat(monet_utf8_to_cp1251"РЎ РїРѕРЅРµРґРµР»СЊРЅРёРєР° РїРѕ РїСЏС‚РЅРёС†Сѓ СЂР°Р±РѕС‡РёР№ РґРµРЅСЊ РёРґС‘С‚ СЃ 10:00 РґРѕ 20:00.")
+        sampSendChat("С понедельника по пятницу рабочий день идёт с 10:00 до 20:00.")
             wait(1500)
-        sampSendChat(monet_utf8_to_cp1251"Р’ РІС‹С…РѕРґРЅС‹Рµ РґРЅРё СЃ 10:00 РґРѕ 19:00.")
+        sampSendChat("В выходные дни с 10:00 до 19:00.")
             wait(1500)
-        sampSendChat(monet_utf8_to_cp1251"Р’ РЅРµСЂР°Р±РѕС‡РµРµ РІСЂРµРјСЏ РёР»Рё РѕС‚РїСЂРѕСЃРёРІС€РёСЃСЊ СЃРѕС‚СЂСѓРґРЅРёРє РјРѕР¶РµС‚ РїРѕРєРёРЅСѓС‚СЊ РѕС„РёСЃ Р“Р¦Р›.")
+        sampSendChat("В нерабочее время или отпросившись сотрудник может покинуть офис ГЦЛ.")
             wait(1500)
-        sampSendChat(monet_utf8_to_cp1251"РќРѕ РїРµСЂРµРґ СЌС‚РёРј РѕР±СЏР·Р°С‚РµР»СЊРЅРѕ РЅСѓР¶РЅРѕ СЃРЅСЏС‚СЊ С„РѕСЂРјСѓ.")
+        sampSendChat("Но перед этим обязательно нужно снять форму.")
             wait(1500)
-        sampSendChat(monet_utf8_to_cp1251"РќР° СЌС‚РѕРј Сѓ РјРµРЅСЏ РІСЃРµ, СЃРїР°СЃРёР±Рѕ Р·Р° РІРЅРёРјР°РЅРёРµ.")
+        sampSendChat("На этом у меня все, спасибо за внимание.")
             wait(1500)
-        sampSendChat(monet_utf8_to_cp1251"Р’СЃРµРј Р·Р° СЂР°Р±РѕС‚Сѓ, РІСЃРµРј СѓРґР°С‡РЅРѕРіРѕ РґРЅСЏ.")
+        sampSendChat("Всем за работу, всем удачного дня.")
         end)
    end
-    if imgui.Button("Р›РµРєС†РёСЏ Рѕ СЃСѓР±РѕСЂРґРёРЅР°С†РёРё") then
+    if imgui.Button(u8"Лекция о субординации") then
         lua_thread.create(function()
-        sampSendChat(monet_utf8_to_cp1251"РџСЂРёРІРµС‚СЃС‚РІСѓСЋ РІСЃРµС… РЅР° Р»РµРєС†РёРё Рѕ СЃСѓР±РѕСЂРґРёРЅР°С†РёРё.")
+        sampSendChat("Приветствую всех на лекции о субординации.")
             wait(1500)
-        sampSendChat(monet_utf8_to_cp1251"РЎСѓР±РѕСЂРґРёРЅР°С†РёСЏ - РїСЂР°РІРёР»Р° РїРѕРґС‡РёРЅРµРЅРёСЏ РјР»Р°РґС€РёС… РїРѕ Р·РІР°РЅРёСЋ Рє СЃС‚Р°СЂС€РёРј РїРѕ Р·РІР°РЅРёСЋ, СѓРІР°Р¶РµРЅРёРµ, РѕС‚РЅРѕС€РµРЅРёРµ Рє РЅРёРј.")
+        sampSendChat("Субординация - правила подчинения младших по званию к старшим по званию, уважение, отношение к ним.")
             wait(1500)
-        sampSendChat(monet_utf8_to_cp1251"РўРѕ РµСЃС‚СЊ, РјР»Р°РґС€РёРµ СЃРѕС‚СЂСѓРґРЅРёРєРё РґРѕР»Р¶РЅС‹ РІС‹РїРѕР»РЅСЏС‚СЊ РїСЂРёРєР°Р·С‹ РЅР°С‡Р°Р»СЊСЃС‚РІР°.")
+        sampSendChat("То есть, младшие сотрудники должны выполнять приказы начальства.")
             wait(1500)
-        sampSendChat(monet_utf8_to_cp1251"РљС‚Рѕ РѕСЃР»СѓС€Р°РµС‚СЃСЏ - РїРѕР»СѓС‡РёС‚ РІС‹РіРѕРІРѕСЂ, РЅРѕ СЃРїРµСЂРІР° СѓСЃС‚РЅС‹Р№.")
+        sampSendChat("Кто ослушается - получит выговор, но сперва устный.")
             wait(1500)
-        sampSendChat(monet_utf8_to_cp1251"Р’С‹ РґРѕР»Р¶РЅС‹ СЃ СѓРІР°Р¶РµРЅРёРµРј РѕС‚РЅРѕСЃРёС‚СЃСЏ Рє РЅР°С‡Р°Р»СЊСЃС‚РІСѓ РЅР° Р’С‹")
+        sampSendChat("Вы должны с уважением относится к начальству на Вы")
             wait(1500)
-        sampSendChat(monet_utf8_to_cp1251"РЅРµ РЅР°СЂСѓС€Р°Р№С‚Рµ РїСЂР°РІРёР»Р° Рё РЅРµ РЅР°СЂСѓС€Р°Р№С‚Рµ СЃСѓР±РѕСЂРґРёРЅР°С†РёСЋ, РґР°Р±С‹ РЅРµ РїРѕР»СѓС‡РёС‚СЊ РЅР°РєР°Р·Р°РЅРёРµ.")
+        sampSendChat("не нарушайте правила и не нарушайте субординацию, дабы не получить наказание.")
             wait(1500)
-        sampSendChat(monet_utf8_to_cp1251"РќР° СЌС‚РѕРј Сѓ РјРµРЅСЏ РІСЃРµ, СЃРїР°СЃРёР±Рѕ Р·Р° РІРЅРёРјР°РЅРёРµ.")
+        sampSendChat("На этом у меня все, спасибо за внимание.")
             wait(1500)
-        sampSendChat(monet_utf8_to_cp1251"Р’СЃРµ Р·Р° СЂР°Р±РѕС‚Сѓ, РІСЃРµРј СѓРґР°С‡РЅРѕРіРѕ РґРЅСЏ.")
+        sampSendChat("Все за работу, всем удачного дня.")
         end)
    end
    --------------
 
-         --Р°РІС‚Рѕ РѕРїСЂРµРґРµР»РµРЅРёРµ СѓСЃС‚Р°РІР°--
+         --авто определение устава--
         elseif CurrentTab == 2 then
         if server == "Arizona RP | Glendale | X4 Payday!" or "Arizona RP | Glendale" then
         for line in result.text:gmatch("[^\r\n]+") do
@@ -359,33 +360,33 @@ if CurrentTab == 1 then
         
         ----------------------------------------------
         
- --3 РєРЅРѕРїРєР° РЅР°СЃС‚СЂРѕР№РєРё--
+ --3 кнопка настройки--
 elseif CurrentTab == 3 then
-imgui.TextWrapped("РђРІС‚РѕСЂ: @UxyOy [Telegram]")
-        imgui.TextWrapped("Р’РµСЂСЃРёСЏ СЃРєСЂРёРїС‚Р°: 1.0")
-        imgui.TextWrapped("РџРёСЃР°С‚СЊ РїРѕ РїСЂРѕР±Р»РµРјР°Рј, РїСЂРµРґР»РѕР¶РµРЅРёСЏРј РјРЅРµ РІ [Telegram]")
-        if imgui.Button("РЎРІСЏР·СЊ СЃ СЂР°Р·СЂР°Р±РѕС‚С‡РёРєРѕРј") then
+imgui.TextWrapped(u8"Автор: @UxyOy [Telegram]")
+        imgui.TextWrapped(u8"Версия скрипта: 1.0")
+        imgui.TextWrapped(u8"Писать по проблемам, предложениям мне в [Telegram]")
+        if imgui.Button(u8"Связь с разработчиком") then
         gta._Z12AND_OpenLinkPKc("https://t.me/UxyOy")
         end
-        if imgui.Button("РџРµСЂРµР·Р°РіСЂСѓР·РёС‚СЊ РЎРєСЂРёРїС‚") then
+        if imgui.Button(u8"Перезагрузить Скрипт") then
 				lua_thread.create(function() wait(5) thisScript():reload() end)
 	    end
 				imgui.ShowCursor = false
-				if imgui.IsItemHovered() then imgui.SetTooltip("РљР»РёРєРЅРёС‚Рµ Р›РљРњ, С‡С‚РѕР±С‹ РїРµСЂРµР·Р°РіСЂСѓР·РёС‚СЊ СЃРєСЂРёРїС‚")
+				if imgui.IsItemHovered() then imgui.SetTooltip("Кликните ЛКМ, чтобы перезагрузить скрипт")
 		end
 			imgui.SameLine()
-			if imgui.Button("Р’С‹РіСЂСѓР·РёС‚СЊ РЎРєСЂРёРїС‚") then
+			if imgui.Button(u8"Выгрузить Скрипт") then
 				lua_thread.create(function() wait(1) thisScript():unload() end)
 				imgui.ShowCursor = false
 		    end
-			if imgui.Combo("РўРµРјС‹",colorListNumber,colorListBuffer, #colorList) then
+			if imgui.Combo("Темы",colorListNumber,colorListBuffer, #colorList) then
             theme[colorListNumber[0]+1].change()
             end
 
 if imgui.update.needupdate then
-    local centered_x = (imgui.GetWindowWidth() - imgui.CalcTextSize("РћР±РЅРѕРІРёС‚СЊСЃСЏ").x) / 2
+    local centered_x = (imgui.GetWindowWidth() - imgui.CalcTextSize(u8"Обновиться").x) / 2
     imgui.SetCursorPosX(centered_x)
-    if imgui.Button("РћР±РЅРѕРІРёС‚СЊСЃСЏ") then
+    if imgui.Button(u8"Обновиться") then
         local response = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/AutoSchool-Helper.lua")
         if response.status_code == 200 then
             local file = io.open(thisScript().filename, "wb")
@@ -394,31 +395,31 @@ if imgui.update.needupdate then
                 file:close()
                 thisScript():reload()
             else
-                sampAddChatMessage(monet_utf8_to_cp1251"РЈРїСЃ, РѕС€РёР±РѕС‡РєР°, СЃРѕРѕР±С‰Рё Р°РІС‚РѕСЂСѓ СЃРєСЂРёРїС‚Р°, РѕРЅРѕ РІ РЅР°СЃС‚СЂРѕР№РєР°С…", -1)
+                sampAddChatMessage("Упс, ошибочка, сообщи автору скрипта, оно в настройках", -1)
             end
         end
     end
 else
-    local centered_x = (imgui.GetWindowWidth() - imgui.CalcTextSize("РџСЂРѕРІРµСЂРёС‚СЊ РѕР±РЅРѕРІР»РµРЅРёРµ").x) / 2
+    local centered_x = (imgui.GetWindowWidth() - imgui.CalcTextSize("Проверить обновление").x) / 2
     imgui.SetCursorPosX(centered_x)
-    if imgui.Button("РџСЂРѕРІРµСЂРёС‚СЊ РѕР±РЅРѕРІР»РµРЅРёРµ") then
+    if imgui.Button(u8"Проверить обновление") then
         local response = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/test.json")
         if response.status_code == 200 then
-            -- РџСЂРµРґРїРѕР»Р°РіР°РµРј, С‡С‚Рѕ С‚РµР»Рѕ РѕС‚РІРµС‚Р° РІ С„РѕСЂРјР°С‚Рµ JSON Рё СЃРѕРґРµСЂР¶РёС‚ РїРѕР»Рµ "version"
-            local data = json.decode(response.text) -- РџСЂРµРґРїРѕР»Р°РіР°РµРј, С‡С‚Рѕ РµСЃС‚СЊ Р±РёР±Р»РёРѕС‚РµРєР° JSON
+            -- Предполагаем, что тело ответа в формате JSON и содержит поле "version"
+            local data = json.decode(response.text) -- Предполагаем, что есть библиотека JSON
             if data and data.version and data.version ~= imgui.update.version then
                 imgui.update.needupdate = true
-                imgui.update.updateText = "РќР°Р№РґРµРЅРѕ РѕР±РЅРѕРІР»РµРЅРёРµ РЅР° РІРµСЂСЃРёСЋ " .. data.version
+                imgui.update.updateText = "Найдено обновление на версию " .. data.version
             else
-                imgui.update.updateText = "РћР±РЅРѕРІР»РµРЅРёР№ РЅРµ РЅР°Р№РґРµРЅРѕ"
+                imgui.update.updateText = "Обновлений не найдено"
             end
         else
-            imgui.update.updateText = "РћС€РёР±РєР° " .. tostring(response.status_code)
+            imgui.update.updateText = "Ошибка " .. tostring(response.status_code)
         end
     end
 end
 
--- РЈРІРµРґРѕРјР»РµРЅРёРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РѕР± РѕР±РЅРѕРІР»РµРЅРёСЏС…
+-- Уведомление пользователя об обновлениях
 if imgui.update.updateText ~= "" then
     imgui.Separator()
     local updateTextWidth = imgui.CalcTextSize(imgui.update.updateText).x
@@ -431,75 +432,77 @@ end
     imgui.End()
     end
     end)
--- == [РћСЃРЅРѕРІРЅРѕРµ] РЎРѕРґРµСЂР¶РёРјРѕРµ РІРєР»Р°РґРѕРє Р·Р°РєРѕРЅС‡РёР»РѕСЃСЊ, Р·РЅР°С‡РёС‚ Р·Р°РєР°РЅС‡РёРІР°РµРј РјРёРјРіСѓРё. == --  
+-- == [Основное] Содержимое вкладок закончилось, значит заканчиваем мимгуи. == --  
      
 imgui.OnFrame(function() return cmd[0] end, function(player)
     imgui.SetNextWindowSize(imgui.ImVec2(100, 200))
-    imgui.Begin("AutoSchool Helper", WinState)
-    imgui.TextWrapped("РљРѕРјР°РЅРґС‹: /lic ID, /om, /expel [ID] [REASON], /helper, /bug")
+    imgui.Begin(u8"AutoSchool Helper", WinState)
+    imgui.TextWrapped(u8"Команды: /lic ID, /om, /expel [ID] [REASON], /helper, /bug")
     end)
 
---РІС‹РґР°С‡Р° Р»РёС†РµРЅР·РёР№--
+--выдача лицензий--
 function cmd_givelicense(id)
     if id == "" then
-        sampAddChatMessage("Р’РІРµРґРё Р°Р№РґРё РёРіСЂРѕРєР°: {FFFFFF}/lic [ID]", 0x318CE7FF)
+        sampAddChatMessage("Введи айди игрока: {FFFFFF}/lic [ID]", 0x318CE7FF)
     else
         lua_thread.create(function()
-            sampSendChat(monet_utf8_to_cp1251"/givelicense "..id)
-            sampSendChat(monet_utf8_to_cp1251"/todo РҐРѕСЂРѕС€Рѕ, РјРёРЅСѓС‚РѕС‡РєСѓ*РїРѕРІРµСЂРЅСѓРІ РљРџРљ РІ СЃРІРѕСЋ СЃС‚РѕСЂРѕРЅСѓ Рё С‡С‚Рѕ-С‚Рѕ РІС‹Р±РёСЂР°СЏ РЅР° РЅРµРј")
+            sampSendChat("/givelicense "..id)
+            sampSendChat("/todo Хорошо, минуточку*повернув КПК в свою сторону и что-то выбирая на нем")
                 wait(1500)
-            sampSendChat(monet_utf8_to_cp1251"/do РќР° РљРџРљ РІС‹Р±СЂР°РЅР° РЅСѓР¶РЅР° Р»РёС†РµРЅР·РёСЏ, Рё РїРѕРєР°Р·Р°РЅР° СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰Р°СЏ С†РµРЅР°.")
+            sampSendChat("/do На КПК выбрана нужна лицензия, и показана соответствующая цена.")
                 wait(1500)
-            sampSendChat(monet_utf8_to_cp1251"/me РїРѕРґС‚РІРµСЂР¶РґР°РµС‚ РІС‹Р±РѕСЂ Р»РёС†РµРЅР·РёРё")
+            sampSendChat("/me подтверждает выбор лицензии")
                 wait(1500)
-            sampSendChat(monet_utf8_to_cp1251"/do РљРџРљ РїРµС‡Р°С‚Р°РµС‚ С‡РµРє.")
+            sampSendChat("/do КПК печатает чек.")
                 wait(1500)
-            sampSendChat(monet_utf8_to_cp1251"/do Р§РµРє РіРѕС‚РѕРІ.")
+            sampSendChat("/do Чек готов.")
                 wait(1500)
-            sampSendChat(monet_utf8_to_cp1251"/do РќР° С‡РµРєРµ РЅР°РїРёСЃР°РЅР° СЃСѓРјРјР° РѕРїР»Р°С‚С‹.")
+            sampSendChat("/do На чеке написана сумма оплаты.")
                 wait(1500)
-            sampSendChat(monet_utf8_to_cp1251"/me РїРµСЂРµРґР°Р» С‡РµРє С‡РµР»РѕРІРµРєСѓ РЅР°РїСЂРѕС‚РёРІ")
+            sampSendChat("/me передал чек человеку напротив")
                 wait(1500)
-            sampSendChat(monet_utf8_to_cp1251"/me РІРµР» РґР°РЅРЅС‹Рµ РіСЂР°Р¶РґР°РЅРёРЅР° РІ РљРџРљ")
+            sampSendChat("/me вел данные гражданина в КПК")
                 wait(1500)
-            sampSendChat(monet_utf8_to_cp1251"/do Р”Р°РЅРЅС‹Рµ РІРІРµРґРµРЅС‹ РІРµСЂРЅРѕ.")
+            sampSendChat("/do Данные введены верно.")
                 wait(1500)
-            sampSendChat(monet_utf8_to_cp1251"Р’СЃРµРіРѕ С…РѕСЂРѕС€РµРіРѕ, РїСЂРёС…РѕРґРёС‚Рµ РµС‰Рµ!")
+            sampSendChat("Всего хорошего, приходите еще!")
             end)
         end
 end
 --------------
 
---РІС‹РіРЅР°С‚СЊ РїРѕСЃРµС‚РёС‚РµР»СЏ
+--выгнать посетителя
 function cmd_expel(id)
     if id == "" then
-        sampAddChatMessage(monet_utf8_to_cp1251"Р’РІРµРґРё Р°Р№РґРё РёРіСЂРѕРєР°: {FFFFFF}/expel [ID] [REASON]", 0x318CE7FF )
+        sampAddChatMessage("Введи айди игрока: {FFFFFF}/expel [ID] [REASON]", 0x318CE7FF )
     else
         lua_thread.create(function()
-        sampSendChat(monet_utf8_to_cp1251"/me СЂРµР·РєРёРјРё РґРІРёР¶РµРЅРёСЏРјРё СЂСѓРє Р·Р°Р»РѕРјРёР» СЂСѓРєРё С‡РµР»РѕРІРµРєР°, РїРѕРІС‘Р» РµРіРѕ Р·Р° СЃРѕР±РѕР№ Рє РІС‹С…РѕРґСѓ")
+        sampSendChat("/me резкими движениями рук заломил руки человека, повёл его за собой к выходу")
             wait(1500)
-        sampSendChat(monet_utf8_to_cp1251"/me РѕС‚РєСЂС‹Р» РґРІРµСЂСЊ Р·РґР°РЅРёСЏ, РїРѕСЃР»Рµ С‡РµРіРѕ РІС‹РІРµР» РЅР°СЂСѓС€РёС‚РµР»СЏ РЅР° СѓР»РёС†Сѓ")
-        sampSendChat(monet_utf8_to_cp1251"/expel "..id.." ")
+        sampSendChat("/me открыл дверь здания, после чего вывел нарушителя на улицу")
+        sampSendChat("/expel "..id.." ")
         end)
     end
 end
 ------------------------------------
 
---РїСЂРёРІРµС‚СЃС‚РІРёРµ--
+function sampev.onShowDialog(id, style, title, button1, button2, text)
+  if id == 235 and title == "Основная статистика" then
+    local text = text:gsub('{......}', '')
+    for line in text:gmatch("[^\r\n]+") do
+        if line:find('Должность: {B83434}(%D+)%(%d+%)') then
+            rank = line:match('{B83434}(%D+)%(%d+%)')
+        end
+     end
+  end
+end
+
+--приветствие--
 function cmd_om()
     lua_thread.create(function()
-        sampSendChat(monet_utf8_to_cp1251"/stats")
-        wait(1500)
-        local title = "РћСЃРЅРѕРІРЅР°СЏ СЃС‚Р°С‚РёСЃС‚РёРєР°"
-        local text = sampGetDialogText(title)
-        local rank, rank_number = text:match("{FFFFFF}Р”РѕР»Р¶РЅРѕСЃС‚СЊ: {B83434}(.+)%((%d+)%)")
-        if title == "РћСЃРЅРѕРІРЅР°СЏ СЃС‚Р°С‚РёСЃС‚РёРєР°" then
-            if rank and rank_number then
-            sampSendChat(monet_utf8_to_cp1251"Р”РѕР±СЂРѕРіРѕ РІСЂРµРјРµРЅРё СЃСѓС‚РѕРє, РјРµРЅСЏ Р·РѕРІСѓС‚ ".. name ..". Р§РµРј РјРѕРіСѓ РІР°Рј РїРѕРјРѕС‡СЊ?")
+            sampSendChat("Доброго времени суток, меня зовут ".. name ..". Чем могу вам помочь?")
                 wait(1500)
-            sampSendChat(monet_utf8_to_cp1251"/do РќР° РіСЂСѓРґРё РІРёСЃРёС‚ Р±РµР№РґР¶, РЅР° РєРѕС‚РѕСЂРѕРј РЅР°РїРёСЃР°РЅРѕ: " .. rank .. " - " .. name)
-            end
-        end
+            sampSendChat("/do На груди висит бейдж, на котором написано: " .. rank .. " - " .. name)
     end)
 end
 -------------------------
@@ -509,7 +512,7 @@ ffi.cdef[[
 ]]
 
 
---С‚РµРјС‹--
+--темы--
 theme = {
     {
         change = function()
