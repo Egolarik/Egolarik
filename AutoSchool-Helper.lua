@@ -95,11 +95,12 @@ function main()
     sampRegisterChatCommand("om", cmd_om)
     sampRegisterChatCommand("expel", cmd_expel)
     sampRegisterChatCommand("bug", openC)
-    sampRegisterChatCommand("helper", function()
+    sampRegisterChatCommand("open.", function()
         WinState[0] = not WinState[0]
     end)
     sampRegisterChatCommand("helpers", function()
 	cmd[0] = not cmd[0]
+    end)
 end
 ------------------------------------
 
