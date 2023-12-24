@@ -56,7 +56,7 @@ end
 
 --ОБНОВЛЕНИЕ--
 if not imgui.update then
-  imgui.update = { needupdate = false, updateText = u8"Нажмите на \"Проверить обновление\"", version = "beta 1.1.0" }
+  imgui.update = { needupdate = false, updateText = "Нажмите на \"Проверить обновление\"", version = "beta 1.2.0" }
 end
 ---------------------------
 	
@@ -86,6 +86,9 @@ local colorListBuffer = new["const char*"][#colorList](colorList)
         local result16 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Casa-Grande.txt")
         local result17 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Page.txt")
         local result18 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Sun-City.txt")
+        local result19 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Queen-Creek.txt")
+        local result20 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Gilbert.txt")
+        local result21 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Sedona.txt")
 ------------------
 
 --регистрация команд--
@@ -96,7 +99,7 @@ function main()
     sampRegisterChatCommand("om", cmd_om)
     sampRegisterChatCommand("expel", cmd_expel)
     sampRegisterChatCommand("bug", openC)
-    sampRegisterChatCommand("open.", function()
+    sampRegisterChatCommand("helper", function()
         WinState[0] = not WinState[0]
     end)
     sampRegisterChatCommand("helpers", function()
@@ -373,7 +376,7 @@ imgui.TextWrapped(u8"Автор: @UxyOy [Telegram]")
 				lua_thread.create(function() wait(5) thisScript():reload() end)
 	    end
 				imgui.ShowCursor = false
-				if imgui.IsItemHovered() then imgui.SetTooltip(u8"Кликните ЛКМ, чтобы перезагрузить скрипт")
+				if imgui.IsItemHovered() then imgui.SetTooltip("Кликните ЛКМ, чтобы перезагрузить скрипт")
 		end
 			imgui.SameLine()
 			if imgui.Button(u8"Выгрузить Скрипт") then
@@ -410,12 +413,12 @@ else
             local data = json.decode(response.text) -- Предполагаем, что есть библиотека JSON
             if data and data.version and data.version ~= imgui.update.version then
                 imgui.update.needupdate = true
-                imgui.update.updateText = u8"Найдено обновление на версию " .. data.version
+                imgui.update.updateText = "Найдено обновление на версию " .. data.version
             else
-                imgui.update.updateText = u8"Обновлений не найдено"
+                imgui.update.updateText = "Обновлений не найдено"
             end
         else
-            imgui.update.updateText = u8"Ошибка " .. tostring(response.status_code)
+            imgui.update.updateText = "Ошибка " .. tostring(response.status_code)
         end
     end
 end
@@ -487,12 +490,27 @@ function cmd_expel(id)
 end
 ------------------------------------
 
+function onScriptTerminate(slot0, slot1)
+	if slot0 == thisScript() and not slot1 then
+		thisScript():reload()
+	end
+end
+
 --приветствие--
 function cmd_om()
     lua_thread.create(function()
+        sampSendChat("/stats")
+        wait(1500)
+        local title = "Основная статистика"
+        local text = sampGetDialogText(title)
+        local rank, rank_number = text:match("{FFFFFF}Должность: {B83434}(.+)%((%d+)%)")
+        if title == "Основная статистика" then
+            if rank and rank_number then
             sampSendChat("Доброго времени суток, меня зовут ".. name ..". Чем могу вам помочь?")
                 wait(1500)
-            sampSendChat("/do На груди висит бейдж, на котором написано: " .. rank .. " - " .. name)
+            sampSendChat("/do На груди висит бейдж, на котором написано: " .. rank .. " - " .. name ..".")
+            end
+        end
     end)
 end
 -------------------------
