@@ -1,5 +1,5 @@
--- исходный код открыт, автор не против для изменения.
-------------------------Библиотеки------------------------------
+-- ГЁГ±ГµГ®Г¤Г­Г»Г© ГЄГ®Г¤ Г®ГІГЄГ°Г»ГІ, Г ГўГІГ®Г° Г­ГҐ ГЇГ°Г®ГІГЁГў Г¤Г«Гї ГЁГ§Г¬ГҐГ­ГҐГ­ГЁГї.
+------------------------ГЃГЁГЎГ«ГЁГ®ГІГҐГЄГЁ------------------------------
 
 local encoding = require("encoding")
 local sampev = require("lib.samp.events")
@@ -13,12 +13,12 @@ local json = require("cjson")
 
 function sampev.onSendSpawn()
 		sampSendChat("/stats")
-		sampAddChatMessage("[UxyOy AutoSchool Helper]: {FFFFFF}Скрипт успешно загрузился", 9109759)
-		sampAddChatMessage("[UxyOy AutoSchool Helper]: {FFFFFF}Авторы:t.me/UxyOy", 9109759)
-		sampAddChatMessage("[UxyOy AutoSchool Helper]: {FFFFFF}Чтобы посмотреть комманды,введите /helper and /helpers", 9109759)
+		sampAddChatMessage("[UxyOy AutoSchool Helper]: {FFFFFF}Г‘ГЄГ°ГЁГЇГІ ГіГ±ГЇГҐГёГ­Г® Г§Г ГЈГ°ГіГ§ГЁГ«Г±Гї", 9109759)
+		sampAddChatMessage("[UxyOy AutoSchool Helper]: {FFFFFF}ГЂГўГІГ®Г°Г»:t.me/UxyOy", 9109759)
+		sampAddChatMessage("[UxyOy AutoSchool Helper]: {FFFFFF}Г—ГІГ®ГЎГ» ГЇГ®Г±Г¬Г®ГІГ°ГҐГІГј ГЄГ®Г¬Г¬Г Г­Г¤Г»,ГўГўГҐГ¤ГЁГІГҐ /helper and /helpers", 9109759)
 end
 
---ПЕРЕМЕННЫЕ--
+--ГЏГ…ГђГ…ГЊГ…ГЌГЌГ›Г…--
 local gta = ffi.load("GTASA")
 local CurrentTab = 0
 local fa = faicons
@@ -40,7 +40,7 @@ EXPORTS = {
    }
 -------------------------------------------------------------------------------------
 
---СОХРАНЕНИЕ ТЕМЫ--
+--Г‘ГЋГ•ГђГЂГЌГ…ГЌГ€Г… Г’Г…ГЊГ›--
 local ini = inicfg.load({
     cfg =
     {
@@ -48,24 +48,24 @@ theme = 1
     }}, "AutoSchool.ini")
 -------------------------------------
 
---ОПРЕДЕЛЕНИЕ АЙДИ С СЕРВЕРОМ--
+--ГЋГЏГђГ…Г„Г…Г‹Г…ГЌГ€Г… ГЂГ‰Г„Г€ Г‘ Г‘Г…ГђГ‚Г…ГђГЋГЊ--
 function sampev.onInitGame(id, server)
 end
 --------------------------------------------------------------
 
---ОБНОВЛЕНИЕ--
+--ГЋГЃГЌГЋГ‚Г‹Г…ГЌГ€Г…--
 if not imgui.update then
-  imgui.update = { needupdate = false, updateText = "Нажмите на \"Проверить обновление\"", version = "beta 1.2.1" }
+  imgui.update = { needupdate = false, updateText = "ГЌГ Г¦Г¬ГЁГІГҐ Г­Г  \"ГЏГ°Г®ГўГҐГ°ГЁГІГј Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ\"", version = "beta 1.3.0" }
 end
 ---------------------------
 	
---СПИСОК ТЕМ ДЛЯ МЕНЮ ХЕЛПЕРА--
-local colorList = {u8"Красная", u8"Зелёная",u8"Синяя", u8"Темная", u8"Фиолетовая", u8"Фиолетовая #2", u8"Красная #2"}
+--Г‘ГЏГ€Г‘ГЋГЉ Г’Г…ГЊ Г„Г‹Гџ ГЊГ…ГЌГћ Г•Г…Г‹ГЏГ…ГђГЂ--
+local colorList = {u8"ГЉГ°Г Г±Г­Г Гї", u8"Г‡ГҐГ«ВёГ­Г Гї",u8"Г‘ГЁГ­ГїГї", u8"Г’ГҐГ¬Г­Г Гї", u8"Г”ГЁГ®Г«ГҐГІГ®ГўГ Гї", u8"Г”ГЁГ®Г«ГҐГІГ®ГўГ Гї #2", u8"ГЉГ°Г Г±Г­Г Гї #2"}
 local colorListNumber = new.int(ini.cfg.theme - 1)
 local colorListBuffer = new["const char*"][#colorList](colorList)
 --------------------------------------------------------------
 
---УСТАВЫ--
+--Г“Г‘Г’ГЂГ‚Г›--
         local result = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Phoenix.txt")
         local result1 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Tucson.txt")
         local result2 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Scottdale.txt")
@@ -87,7 +87,7 @@ local colorListBuffer = new["const char*"][#colorList](colorList)
         local result18 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Sun-City.txt")
 ------------------
 
---регистрация команд--
+--Г°ГҐГЈГЁГ±ГІГ°Г Г¶ГЁГї ГЄГ®Г¬Г Г­Г¤--
 function main()
     while not isSampAvailable() do wait(100) end
     sampAddChatMessage(rank, -1)
@@ -104,7 +104,7 @@ function main()
 end
 ------------------------------------
 
---инициализация иконок с темой--
+--ГЁГ­ГЁГ¶ГЁГ Г«ГЁГ§Г Г¶ГЁГї ГЁГЄГ®Г­Г®ГЄ Г± ГІГҐГ¬Г®Г©--
 imgui.OnInitialize(function()
     imgui.GetIO().IniFilename = nil
     local config = imgui.ImFontConfig()
@@ -117,15 +117,15 @@ imgui.OnInitialize(function()
 end)
 ------------------------------------------------------
 
---сохранение кфг--
+--Г±Г®ГµГ°Г Г­ГҐГ­ГЁГҐ ГЄГґГЈ--
 function cfg_save()
 inicfg.save(ini, "AutoSchool.ini")
 end
 -----------------------------
 
---декор--
+--Г¤ГҐГЄГ®Г°--
 function decor()
-    -- == Декор часть == --
+    -- == Г„ГҐГЄГ®Г° Г·Г Г±ГІГј == --
     imgui.SwitchContext()
     local ImVec4 = imgui.ImVec4
     imgui.GetStyle().WindowPadding = imgui.ImVec2(5, 5)
@@ -151,26 +151,26 @@ function decor()
 end
 --------------
 
---отрисовка мимгуи
+--Г®ГІГ°ГЁГ±Г®ГўГЄГ  Г¬ГЁГ¬ГЈГіГЁ
 imgui.OnFrame(function() return WinState[0] end, function(player)
     imgui.SetNextWindowSize(imgui.ImVec2(490, 275))
     imgui.Begin(u8"AutoSchool Helper", WinState)
-    --применения декора из кфг--
+    --ГЇГ°ГЁГ¬ГҐГ­ГҐГ­ГЁГї Г¤ГҐГЄГ®Г°Г  ГЁГ§ ГЄГґГЈ--
     decor()
     ini.cfg.theme = colorListNumber[0]+1
     cfg_save()
     ------------------------------------------------
 
---создание кнопок--
-if imgui.Button(fa("graduation_cap") ..u8 "Лекции", imgui.ImVec2(118, 28)) then
+--Г±Г®Г§Г¤Г Г­ГЁГҐ ГЄГ­Г®ГЇГ®ГЄ--
+if imgui.Button(fa("graduation_cap") ..u8 "Г‹ГҐГЄГ¶ГЁГЁ", imgui.ImVec2(118, 28)) then
 CurrentTab = 1
 end
 
-if imgui.Button(fa("file") ..u8 "Устав", imgui.ImVec2(118, 28)) then
+if imgui.Button(fa("file") ..u8 "Г“Г±ГІГ Гў", imgui.ImVec2(118, 28)) then
 CurrentTab = 2 
 end
 
-if imgui.Button(fa("gears") ..u8 "Настройки", imgui.ImVec2(118, 28)) then
+if imgui.Button(fa("gears") ..u8 "ГЌГ Г±ГІГ°Г®Г©ГЄГЁ", imgui.ImVec2(118, 28)) then
 CurrentTab = 3
 end
 ---------------------------------
@@ -179,52 +179,52 @@ imgui.Separator()
 
 
 
---код кнопки лекция
+--ГЄГ®Г¤ ГЄГ­Г®ГЇГЄГЁ Г«ГҐГЄГ¶ГЁГї
 if CurrentTab == 1 then
-    imgui.TextWrapped(u8"Открыта первая вкладка Лекции")
-    if imgui.Button(u8"Лекция о рабочем дне") then
+    imgui.TextWrapped(u8"ГЋГІГЄГ°Г»ГІГ  ГЇГҐГ°ГўГ Гї ГўГЄГ«Г Г¤ГЄГ  Г‹ГҐГЄГ¶ГЁГЁ")
+    if imgui.Button(u8"Г‹ГҐГЄГ¶ГЁГї Г® Г°Г ГЎГ®Г·ГҐГ¬ Г¤Г­ГҐ") then
         lua_thread.create(function()
-        sampSendChat("Приветствую всех на лекции о рабочем дне.")
+        sampSendChat("ГЏГ°ГЁГўГҐГІГ±ГІГўГіГѕ ГўГ±ГҐГµ Г­Г  Г«ГҐГЄГ¶ГЁГЁ Г® Г°Г ГЎГ®Г·ГҐГ¬ Г¤Г­ГҐ.")
             wait(1500)
-        sampSendChat("Сотрудники в рабочее время обязаны находиться в офисе ГЦЛ в форме.")
+        sampSendChat("Г‘Г®ГІГ°ГіГ¤Г­ГЁГЄГЁ Гў Г°Г ГЎГ®Г·ГҐГҐ ГўГ°ГҐГ¬Гї Г®ГЎГїГ§Г Г­Г» Г­Г ГµГ®Г¤ГЁГІГјГ±Гї Гў Г®ГґГЁГ±ГҐ ГѓГ–Г‹ Гў ГґГ®Г°Г¬ГҐ.")
             wait(1500)
-        sampSendChat("За прогул рабочего дня сотрудник получит выговор или увольнение.")
+        sampSendChat("Г‡Г  ГЇГ°Г®ГЈГіГ« Г°Г ГЎГ®Г·ГҐГЈГ® Г¤Г­Гї Г±Г®ГІГ°ГіГ¤Г­ГЁГЄ ГЇГ®Г«ГіГ·ГЁГІ ГўГ»ГЈГ®ГўГ®Г° ГЁГ«ГЁ ГіГўГ®Г«ГјГ­ГҐГ­ГЁГҐ.")
             wait(1500)
-        sampSendChat("С понедельника по пятницу рабочий день идёт с 10:00 до 20:00.")
+        sampSendChat("Г‘ ГЇГ®Г­ГҐГ¤ГҐГ«ГјГ­ГЁГЄГ  ГЇГ® ГЇГїГІГ­ГЁГ¶Гі Г°Г ГЎГ®Г·ГЁГ© Г¤ГҐГ­Гј ГЁГ¤ВёГІ Г± 10:00 Г¤Г® 20:00.")
             wait(1500)
-        sampSendChat("В выходные дни с 10:00 до 19:00.")
+        sampSendChat("Г‚ ГўГ»ГµГ®Г¤Г­Г»ГҐ Г¤Г­ГЁ Г± 10:00 Г¤Г® 19:00.")
             wait(1500)
-        sampSendChat("В нерабочее время или отпросившись сотрудник может покинуть офис ГЦЛ.")
+        sampSendChat("Г‚ Г­ГҐГ°Г ГЎГ®Г·ГҐГҐ ГўГ°ГҐГ¬Гї ГЁГ«ГЁ Г®ГІГЇГ°Г®Г±ГЁГўГёГЁГ±Гј Г±Г®ГІГ°ГіГ¤Г­ГЁГЄ Г¬Г®Г¦ГҐГІ ГЇГ®ГЄГЁГ­ГіГІГј Г®ГґГЁГ± ГѓГ–Г‹.")
             wait(1500)
-        sampSendChat("Но перед этим обязательно нужно снять форму.")
+        sampSendChat("ГЌГ® ГЇГҐГ°ГҐГ¤ ГЅГІГЁГ¬ Г®ГЎГїГ§Г ГІГҐГ«ГјГ­Г® Г­ГіГ¦Г­Г® Г±Г­ГїГІГј ГґГ®Г°Г¬Гі.")
             wait(1500)
-        sampSendChat("На этом у меня все, спасибо за внимание.")
+        sampSendChat("ГЌГ  ГЅГІГ®Г¬ Гі Г¬ГҐГ­Гї ГўГ±ГҐ, Г±ГЇГ Г±ГЁГЎГ® Г§Г  ГўГ­ГЁГ¬Г Г­ГЁГҐ.")
             wait(1500)
-        sampSendChat("Всем за работу, всем удачного дня.")
+        sampSendChat("Г‚Г±ГҐГ¬ Г§Г  Г°Г ГЎГ®ГІГі, ГўГ±ГҐГ¬ ГіГ¤Г Г·Г­Г®ГЈГ® Г¤Г­Гї.")
         end)
    end
-    if imgui.Button(u8"Лекция о субординации") then
+    if imgui.Button(u8"Г‹ГҐГЄГ¶ГЁГї Г® Г±ГіГЎГ®Г°Г¤ГЁГ­Г Г¶ГЁГЁ") then
         lua_thread.create(function()
-        sampSendChat("Приветствую всех на лекции о субординации.")
+        sampSendChat("ГЏГ°ГЁГўГҐГІГ±ГІГўГіГѕ ГўГ±ГҐГµ Г­Г  Г«ГҐГЄГ¶ГЁГЁ Г® Г±ГіГЎГ®Г°Г¤ГЁГ­Г Г¶ГЁГЁ.")
             wait(1500)
-        sampSendChat("Субординация - правила подчинения младших по званию к старшим по званию, уважение, отношение к ним.")
+        sampSendChat("Г‘ГіГЎГ®Г°Г¤ГЁГ­Г Г¶ГЁГї - ГЇГ°Г ГўГЁГ«Г  ГЇГ®Г¤Г·ГЁГ­ГҐГ­ГЁГї Г¬Г«Г Г¤ГёГЁГµ ГЇГ® Г§ГўГ Г­ГЁГѕ ГЄ Г±ГІГ Г°ГёГЁГ¬ ГЇГ® Г§ГўГ Г­ГЁГѕ, ГіГўГ Г¦ГҐГ­ГЁГҐ, Г®ГІГ­Г®ГёГҐГ­ГЁГҐ ГЄ Г­ГЁГ¬.")
             wait(1500)
-        sampSendChat("То есть, младшие сотрудники должны выполнять приказы начальства.")
+        sampSendChat("Г’Г® ГҐГ±ГІГј, Г¬Г«Г Г¤ГёГЁГҐ Г±Г®ГІГ°ГіГ¤Г­ГЁГЄГЁ Г¤Г®Г«Г¦Г­Г» ГўГ»ГЇГ®Г«Г­ГїГІГј ГЇГ°ГЁГЄГ Г§Г» Г­Г Г·Г Г«ГјГ±ГІГўГ .")
             wait(1500)
-        sampSendChat("Кто ослушается - получит выговор, но сперва устный.")
+        sampSendChat("ГЉГІГ® Г®Г±Г«ГіГёГ ГҐГІГ±Гї - ГЇГ®Г«ГіГ·ГЁГІ ГўГ»ГЈГ®ГўГ®Г°, Г­Г® Г±ГЇГҐГ°ГўГ  ГіГ±ГІГ­Г»Г©.")
             wait(1500)
-        sampSendChat("Вы должны с уважением относится к начальству на Вы")
+        sampSendChat("Г‚Г» Г¤Г®Г«Г¦Г­Г» Г± ГіГўГ Г¦ГҐГ­ГЁГҐГ¬ Г®ГІГ­Г®Г±ГЁГІГ±Гї ГЄ Г­Г Г·Г Г«ГјГ±ГІГўГі Г­Г  Г‚Г»")
             wait(1500)
-        sampSendChat("не нарушайте правила и не нарушайте субординацию, дабы не получить наказание.")
+        sampSendChat("Г­ГҐ Г­Г Г°ГіГёГ Г©ГІГҐ ГЇГ°Г ГўГЁГ«Г  ГЁ Г­ГҐ Г­Г Г°ГіГёГ Г©ГІГҐ Г±ГіГЎГ®Г°Г¤ГЁГ­Г Г¶ГЁГѕ, Г¤Г ГЎГ» Г­ГҐ ГЇГ®Г«ГіГ·ГЁГІГј Г­Г ГЄГ Г§Г Г­ГЁГҐ.")
             wait(1500)
-        sampSendChat("На этом у меня все, спасибо за внимание.")
+        sampSendChat("ГЌГ  ГЅГІГ®Г¬ Гі Г¬ГҐГ­Гї ГўГ±ГҐ, Г±ГЇГ Г±ГЁГЎГ® Г§Г  ГўГ­ГЁГ¬Г Г­ГЁГҐ.")
             wait(1500)
-        sampSendChat("Все за работу, всем удачного дня.")
+        sampSendChat("Г‚Г±ГҐ Г§Г  Г°Г ГЎГ®ГІГі, ГўГ±ГҐГ¬ ГіГ¤Г Г·Г­Г®ГЈГ® Г¤Г­Гї.")
         end)
    end
    --------------
 
-         --авто определение устава--
+         --Г ГўГІГ® Г®ГЇГ°ГҐГ¤ГҐГ«ГҐГ­ГЁГҐ ГіГ±ГІГ ГўГ --
         elseif CurrentTab == 2 then
         if server == "Arizona RP | Glendale | X4 Payday!" or "Arizona RP | Glendale" then
         for line in result.text:gmatch("[^\r\n]+") do
@@ -360,33 +360,33 @@ if CurrentTab == 1 then
         
         ----------------------------------------------
         
- --3 кнопка настройки--
+ --3 ГЄГ­Г®ГЇГЄГ  Г­Г Г±ГІГ°Г®Г©ГЄГЁ--
 elseif CurrentTab == 3 then
-imgui.TextWrapped(u8"Автор: @UxyOy [Telegram]")
-        imgui.TextWrapped(u8"Версия скрипта: 1.0")
-        imgui.TextWrapped(u8"Писать по проблемам, предложениям мне в [Telegram]")
-        if imgui.Button(u8"Связь с разработчиком") then
+imgui.TextWrapped(u8"ГЂГўГІГ®Г°: @UxyOy [Telegram]")
+        imgui.TextWrapped(u8"Г‚ГҐГ°Г±ГЁГї Г±ГЄГ°ГЁГЇГІГ : 1.0")
+        imgui.TextWrapped(u8"ГЏГЁГ±Г ГІГј ГЇГ® ГЇГ°Г®ГЎГ«ГҐГ¬Г Г¬, ГЇГ°ГҐГ¤Г«Г®Г¦ГҐГ­ГЁГїГ¬ Г¬Г­ГҐ Гў [Telegram]")
+        if imgui.Button(u8"Г‘ГўГїГ§Гј Г± Г°Г Г§Г°Г ГЎГ®ГІГ·ГЁГЄГ®Г¬") then
         gta._Z12AND_OpenLinkPKc("https://t.me/UxyOy")
         end
-        if imgui.Button(u8"Перезагрузить Скрипт") then
+        if imgui.Button(u8"ГЏГҐГ°ГҐГ§Г ГЈГ°ГіГ§ГЁГІГј Г‘ГЄГ°ГЁГЇГІ") then
 				lua_thread.create(function() wait(5) thisScript():reload() end)
 	    end
 				imgui.ShowCursor = false
-				if imgui.IsItemHovered() then imgui.SetTooltip("Кликните ЛКМ, чтобы перезагрузить скрипт")
+				if imgui.IsItemHovered() then imgui.SetTooltip("ГЉГ«ГЁГЄГ­ГЁГІГҐ Г‹ГЉГЊ, Г·ГІГ®ГЎГ» ГЇГҐГ°ГҐГ§Г ГЈГ°ГіГ§ГЁГІГј Г±ГЄГ°ГЁГЇГІ")
 		end
 			imgui.SameLine()
-			if imgui.Button(u8"Выгрузить Скрипт") then
+			if imgui.Button(u8"Г‚Г»ГЈГ°ГіГ§ГЁГІГј Г‘ГЄГ°ГЁГЇГІ") then
 				lua_thread.create(function() wait(1) thisScript():unload() end)
 				imgui.ShowCursor = false
 		    end
-			if imgui.Combo("Темы",colorListNumber,colorListBuffer, #colorList) then
+			if imgui.Combo("Г’ГҐГ¬Г»",colorListNumber,colorListBuffer, #colorList) then
             theme[colorListNumber[0]+1].change()
             end
 
 if imgui.update.needupdate then
-    local centered_x = (imgui.GetWindowWidth() - imgui.CalcTextSize(u8"Обновиться").x) / 2
+    local centered_x = (imgui.GetWindowWidth() - imgui.CalcTextSize(u8"ГЋГЎГ­Г®ГўГЁГІГјГ±Гї").x) / 2
     imgui.SetCursorPosX(centered_x)
-    if imgui.Button(u8"Обновиться") then
+    if imgui.Button(u8"ГЋГЎГ­Г®ГўГЁГІГјГ±Гї") then
         local response = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/AutoSchool-Helper.lua")
         if response.status_code == 200 then
             local file = io.open(thisScript().filename, "wb")
@@ -395,31 +395,31 @@ if imgui.update.needupdate then
                 file:close()
                 thisScript():reload()
             else
-                sampAddChatMessage("Упс, ошибочка, сообщи автору скрипта, оно в настройках", -1)
+                sampAddChatMessage("Г“ГЇГ±, Г®ГёГЁГЎГ®Г·ГЄГ , Г±Г®Г®ГЎГ№ГЁ Г ГўГІГ®Г°Гі Г±ГЄГ°ГЁГЇГІГ , Г®Г­Г® Гў Г­Г Г±ГІГ°Г®Г©ГЄГ Гµ", -1)
             end
         end
     end
 else
-    local centered_x = (imgui.GetWindowWidth() - imgui.CalcTextSize("Проверить обновление").x) / 2
+    local centered_x = (imgui.GetWindowWidth() - imgui.CalcTextSize("ГЏГ°Г®ГўГҐГ°ГЁГІГј Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ").x) / 2
     imgui.SetCursorPosX(centered_x)
-    if imgui.Button(u8"Проверить обновление") then
+    if imgui.Button(u8"ГЏГ°Г®ГўГҐГ°ГЁГІГј Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ") then
         local response = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/test.json")
         if response.status_code == 200 then
-            -- Предполагаем, что тело ответа в формате JSON и содержит поле "version"
-            local data = json.decode(response.text) -- Предполагаем, что есть библиотека JSON
+            -- ГЏГ°ГҐГ¤ГЇГ®Г«Г ГЈГ ГҐГ¬, Г·ГІГ® ГІГҐГ«Г® Г®ГІГўГҐГІГ  Гў ГґГ®Г°Г¬Г ГІГҐ JSON ГЁ Г±Г®Г¤ГҐГ°Г¦ГЁГІ ГЇГ®Г«ГҐ "version"
+            local data = json.decode(response.text) -- ГЏГ°ГҐГ¤ГЇГ®Г«Г ГЈГ ГҐГ¬, Г·ГІГ® ГҐГ±ГІГј ГЎГЁГЎГ«ГЁГ®ГІГҐГЄГ  JSON
             if data and data.version and data.version ~= imgui.update.version then
                 imgui.update.needupdate = true
-                imgui.update.updateText = "Найдено обновление на версию " .. data.version
+                imgui.update.updateText = "ГЌГ Г©Г¤ГҐГ­Г® Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГҐ Г­Г  ГўГҐГ°Г±ГЁГѕ " .. data.version
             else
-                imgui.update.updateText = "Обновлений не найдено"
+                imgui.update.updateText = "ГЋГЎГ­Г®ГўГ«ГҐГ­ГЁГ© Г­ГҐ Г­Г Г©Г¤ГҐГ­Г®"
             end
         else
-            imgui.update.updateText = "Ошибка " .. tostring(response.status_code)
+            imgui.update.updateText = "ГЋГёГЁГЎГЄГ  " .. tostring(response.status_code)
         end
     end
 end
 
--- Уведомление пользователя об обновлениях
+-- Г“ГўГҐГ¤Г®Г¬Г«ГҐГ­ГЁГҐ ГЇГ®Г«ГјГ§Г®ГўГ ГІГҐГ«Гї Г®ГЎ Г®ГЎГ­Г®ГўГ«ГҐГ­ГЁГїГµ
 if imgui.update.updateText ~= "" then
     imgui.Separator()
     local updateTextWidth = imgui.CalcTextSize(imgui.update.updateText).x
@@ -432,54 +432,54 @@ end
     imgui.End()
     end
     end)
--- == [Основное] Содержимое вкладок закончилось, значит заканчиваем мимгуи. == --  
+-- == [ГЋГ±Г­Г®ГўГ­Г®ГҐ] Г‘Г®Г¤ГҐГ°Г¦ГЁГ¬Г®ГҐ ГўГЄГ«Г Г¤Г®ГЄ Г§Г ГЄГ®Г­Г·ГЁГ«Г®Г±Гј, Г§Г­Г Г·ГЁГІ Г§Г ГЄГ Г­Г·ГЁГўГ ГҐГ¬ Г¬ГЁГ¬ГЈГіГЁ. == --  
      
 imgui.OnFrame(function() return cmd[0] end, function(player)
     imgui.SetNextWindowSize(imgui.ImVec2(100, 200))
     imgui.Begin(u8"AutoSchool Helper", WinState)
-    imgui.TextWrapped(u8"Команды: /lic ID, /om, /expel [ID] [REASON], /helper, /bug")
+    imgui.TextWrapped(u8"ГЉГ®Г¬Г Г­Г¤Г»: /lic ID, /om, /expel [ID] [REASON], /helper, /bug")
     end)
 
---выдача лицензий--
+--ГўГ»Г¤Г Г·Г  Г«ГЁГ¶ГҐГ­Г§ГЁГ©--
 function cmd_givelicense(id)
     if id == "" then
-        sampAddChatMessage("Введи айди игрока: {FFFFFF}/lic [ID]", 0x318CE7FF)
+        sampAddChatMessage("Г‚ГўГҐГ¤ГЁ Г Г©Г¤ГЁ ГЁГЈГ°Г®ГЄГ : {FFFFFF}/lic [ID]", 0x318CE7FF)
     else
         lua_thread.create(function()
             sampSendChat("/givelicense "..id)
-            sampSendChat("/todo Хорошо, минуточку*повернув КПК в свою сторону и что-то выбирая на нем")
+            sampSendChat("/todo Г•Г®Г°Г®ГёГ®, Г¬ГЁГ­ГіГІГ®Г·ГЄГі*ГЇГ®ГўГҐГ°Г­ГіГў ГЉГЏГЉ Гў Г±ГўГ®Гѕ Г±ГІГ®Г°Г®Г­Гі ГЁ Г·ГІГ®-ГІГ® ГўГ»ГЎГЁГ°Г Гї Г­Г  Г­ГҐГ¬")
                 wait(1500)
-            sampSendChat("/do На КПК выбрана нужна лицензия, и показана соответствующая цена.")
+            sampSendChat("/do ГЌГ  ГЉГЏГЉ ГўГ»ГЎГ°Г Г­Г  Г­ГіГ¦Г­Г  Г«ГЁГ¶ГҐГ­Г§ГЁГї, ГЁ ГЇГ®ГЄГ Г§Г Г­Г  Г±Г®Г®ГІГўГҐГІГ±ГІГўГіГѕГ№Г Гї Г¶ГҐГ­Г .")
                 wait(1500)
-            sampSendChat("/me подтверждает выбор лицензии")
+            sampSendChat("/me ГЇГ®Г¤ГІГўГҐГ°Г¦Г¤Г ГҐГІ ГўГ»ГЎГ®Г° Г«ГЁГ¶ГҐГ­Г§ГЁГЁ")
                 wait(1500)
-            sampSendChat("/do КПК печатает чек.")
+            sampSendChat("/do ГЉГЏГЉ ГЇГҐГ·Г ГІГ ГҐГІ Г·ГҐГЄ.")
                 wait(1500)
-            sampSendChat("/do Чек готов.")
+            sampSendChat("/do Г—ГҐГЄ ГЈГ®ГІГ®Гў.")
                 wait(1500)
-            sampSendChat("/do На чеке написана сумма оплаты.")
+            sampSendChat("/do ГЌГ  Г·ГҐГЄГҐ Г­Г ГЇГЁГ±Г Г­Г  Г±ГіГ¬Г¬Г  Г®ГЇГ«Г ГІГ».")
                 wait(1500)
-            sampSendChat("/me передал чек человеку напротив")
+            sampSendChat("/me ГЇГҐГ°ГҐГ¤Г Г« Г·ГҐГЄ Г·ГҐГ«Г®ГўГҐГЄГі Г­Г ГЇГ°Г®ГІГЁГў")
                 wait(1500)
-            sampSendChat("/me вел данные гражданина в КПК")
+            sampSendChat("/me ГўГҐГ« Г¤Г Г­Г­Г»ГҐ ГЈГ°Г Г¦Г¤Г Г­ГЁГ­Г  Гў ГЉГЏГЉ")
                 wait(1500)
-            sampSendChat("/do Данные введены верно.")
+            sampSendChat("/do Г„Г Г­Г­Г»ГҐ ГўГўГҐГ¤ГҐГ­Г» ГўГҐГ°Г­Г®.")
                 wait(1500)
-            sampSendChat("Всего хорошего, приходите еще!")
+            sampSendChat("Г‚Г±ГҐГЈГ® ГµГ®Г°Г®ГёГҐГЈГ®, ГЇГ°ГЁГµГ®Г¤ГЁГІГҐ ГҐГ№ГҐ!")
             end)
         end
 end
 --------------
 
---выгнать посетителя
+--ГўГ»ГЈГ­Г ГІГј ГЇГ®Г±ГҐГІГЁГІГҐГ«Гї
 function cmd_expel(id)
     if id == "" then
-        sampAddChatMessage("Введи айди игрока: {FFFFFF}/expel [ID] [REASON]", 0x318CE7FF )
+        sampAddChatMessage("Г‚ГўГҐГ¤ГЁ Г Г©Г¤ГЁ ГЁГЈГ°Г®ГЄГ : {FFFFFF}/expel [ID] [REASON]", 0x318CE7FF )
     else
         lua_thread.create(function()
-        sampSendChat("/me резкими движениями рук заломил руки человека, повёл его за собой к выходу")
+        sampSendChat("/me Г°ГҐГ§ГЄГЁГ¬ГЁ Г¤ГўГЁГ¦ГҐГ­ГЁГїГ¬ГЁ Г°ГіГЄ Г§Г Г«Г®Г¬ГЁГ« Г°ГіГЄГЁ Г·ГҐГ«Г®ГўГҐГЄГ , ГЇГ®ГўВёГ« ГҐГЈГ® Г§Г  Г±Г®ГЎГ®Г© ГЄ ГўГ»ГµГ®Г¤Гі")
             wait(1500)
-        sampSendChat("/me открыл дверь здания, после чего вывел нарушителя на улицу")
+        sampSendChat("/me Г®ГІГЄГ°Г»Г« Г¤ГўГҐГ°Гј Г§Г¤Г Г­ГЁГї, ГЇГ®Г±Г«ГҐ Г·ГҐГЈГ® ГўГ»ГўГҐГ« Г­Г Г°ГіГёГЁГІГҐГ«Гї Г­Г  ГіГ«ГЁГ¶Гі")
         sampSendChat("/expel "..id.." ")
         end)
     end
@@ -487,22 +487,22 @@ end
 ------------------------------------
 
 function sampev.onShowDialog(id, style, title, button1, button2, text)
-  if id == 235 and title == "Основная статистика" then
+  if id == 235 and title == "ГЋГ±Г­Г®ГўГ­Г Гї Г±ГІГ ГІГЁГ±ГІГЁГЄГ " then
     local text = text:gsub('{......}', '')
     for line in text:gmatch("[^\r\n]+") do
-        if line:find('Должность: {B83434}(%D+)%(%d+%)') then
+        if line:find('Г„Г®Г«Г¦Г­Г®Г±ГІГј: {B83434}(%D+)%(%d+%)') then
             rank = line:match('{B83434}(%D+)%(%d+%)')
         end
      end
   end
 end
 
---приветствие--
+--ГЇГ°ГЁГўГҐГІГ±ГІГўГЁГҐ--
 function cmd_om()
     lua_thread.create(function()
-            sampSendChat("Доброго времени суток, меня зовут ".. name ..". Чем могу вам помочь?")
+            sampSendChat("Г„Г®ГЎГ°Г®ГЈГ® ГўГ°ГҐГ¬ГҐГ­ГЁ Г±ГіГІГ®ГЄ, Г¬ГҐГ­Гї Г§Г®ГўГіГІ ".. name ..". Г—ГҐГ¬ Г¬Г®ГЈГі ГўГ Г¬ ГЇГ®Г¬Г®Г·Гј?")
                 wait(1500)
-            sampSendChat("/do На груди висит бейдж, на котором написано: " .. rank .. " - " .. name)
+            sampSendChat("/do ГЌГ  ГЈГ°ГіГ¤ГЁ ГўГЁГ±ГЁГІ ГЎГҐГ©Г¤Г¦, Г­Г  ГЄГ®ГІГ®Г°Г®Г¬ Г­Г ГЇГЁГ±Г Г­Г®: " .. rank .. " - " .. name)
     end)
 end
 -------------------------
@@ -512,7 +512,7 @@ ffi.cdef[[
 ]]
 
 
---темы--
+--ГІГҐГ¬Г»--
 theme = {
     {
         change = function()
