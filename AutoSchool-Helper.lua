@@ -441,7 +441,7 @@ end
 imgui.OnFrame(function() return cmd[0] end, function(player)
     imgui.SetNextWindowSize(imgui.ImVec2(100, 200))
     imgui.Begin("AutoSchool Helper", WinState)
-    imgui.Text("Команды: /lic ID, /om, /expel [ID] [REASON], /open")
+    imgui.TextWrapped("Команды: /lic ID, /om, /expel [ID] [REASON], /helper, /bug")
     end)
 
 --выдача лицензий--
