@@ -56,7 +56,7 @@ end
 
 --ОБНОВЛЕНИЕ--
 if not imgui.update then
-  imgui.update = { needupdate = false, updateText = "Нажмите на \"Проверить обновление\"", version = "beta 1.0.0" }
+  imgui.update = { needupdate = false, updateText = u8"Нажмите на \"Проверить обновление\"", version = "beta 1.1.0" }
 end
 ---------------------------
 	
@@ -373,7 +373,7 @@ imgui.TextWrapped(u8"Автор: @UxyOy [Telegram]")
 				lua_thread.create(function() wait(5) thisScript():reload() end)
 	    end
 				imgui.ShowCursor = false
-				if imgui.IsItemHovered() then imgui.SetTooltip("Кликните ЛКМ, чтобы перезагрузить скрипт")
+				if imgui.IsItemHovered() then imgui.SetTooltip(u8"Кликните ЛКМ, чтобы перезагрузить скрипт")
 		end
 			imgui.SameLine()
 			if imgui.Button(u8"Выгрузить Скрипт") then
