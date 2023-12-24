@@ -400,7 +400,7 @@ if imgui.update.needupdate then
         end
     end
 else
-    local centered_x = (imgui.GetWindowWidth() - imgui.CalcTextSize("Ïðîâåðèòü îáíîâëåíèå").x) / 2
+    local centered_x = (imgui.GetWindowWidth() - imgui.CalcTextSize(u8"Ïðîâåðèòü îáíîâëåíèå").x) / 2
     imgui.SetCursorPosX(centered_x)
     if imgui.Button(u8"Ïðîâåðèòü îáíîâëåíèå") then
         local response = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/test.json")
