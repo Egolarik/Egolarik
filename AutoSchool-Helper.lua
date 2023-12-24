@@ -19,7 +19,7 @@ local new, str, sizeof = imgui.new, ffi.string, ffi.sizeof
 encoding.default = "CP1251"
 local toggled = false
 local inputField = imgui.new.char[256]()
-local WinState, WinState = new.bool(), new.bool()
+local WinState, cmd = new.bool(), new.bool()
 ------------------------------------------------------------------------
 
 ------------------------API SCRIPT MANAGER-------------------------
@@ -45,7 +45,7 @@ end
 
 --ОБНОВЛЕНИЕ--
 if not imgui.update then
-  imgui.update = { needupdate = false, updateText = "Нажмите на \"Проверить обновление\"", version = "beta 1.1.0" }
+  imgui.update = { needupdate = false, updateText = "Нажмите на \"Проверить обновление\"", version = "beta 1.1.1" }
 end
 ---------------------------
 	
@@ -95,9 +95,11 @@ function main()
     sampRegisterChatCommand("om", cmd_om)
     sampRegisterChatCommand("expel", cmd_expel)
     sampRegisterChatCommand("bug", openC)
-    sampRegisterChatCommand("open.", function()
+    sampRegisterChatCommand("helper", function()
         WinState[0] = not WinState[0]
     end)
+    sampRegisterChatCommand("helpers", function()
+	cmd[0] = not cmd[0]
 end
 ------------------------------------
 
@@ -436,6 +438,11 @@ end
     end)
 -- == [Основное] Содержимое вкладок закончилось, значит заканчиваем мимгуи. == --  
      
+imgui.OnFrame(function() return cmd[0] end, function(player)
+    imgui.SetNextWindowSize(imgui.ImVec2(100, 200))
+    imgui.Begin("AutoSchool Helper", WinState)
+    imgui.Text("Команды: /lic ID, /om, /expel [ID] [REASON], /open")
+    end)
 
 --выдача лицензий--
 function cmd_givelicense(id)
