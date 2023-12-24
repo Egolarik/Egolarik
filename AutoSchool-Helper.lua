@@ -37,7 +37,11 @@ local ini = inicfg.load({
 theme = 1
     }}, "AutoSchool.ini")
 -------------------------------------
-   
+
+function sampev.onSendSpawn()
+         sampSendChat("/stats")
+end
+
 --ОПРЕДЕЛЕНИЕ АЙДИ С СЕРВЕРОМ--
 function sampev.onInitGame(id, server)
 end
@@ -45,7 +49,7 @@ end
 
 --ОБНОВЛЕНИЕ--
 if not imgui.update then
-  imgui.update = { needupdate = false, updateText = "Нажмите на \"Проверить обновление\"", version = "beta 1.1.1" }
+  imgui.update = { needupdate = false, updateText = "Нажмите на \"Проверить обновление\"", version = "beta 1.1.2" }
 end
 ---------------------------
 	
@@ -494,6 +498,7 @@ end
 --приветствие--
 function cmd_om()
     lua_thread.create(function()
+	    local name = sampGetPlayerNickname(select(2, sampGetPlayerIdByCharHandle(playerPed)))
             sampSendChat(monet_utf8_to_cp1251"Доброго времени суток, меня зовут ".. name ..". Чем могу вам помочь?")
                 wait(1500)
             sampSendChat(monet_utf8_to_cp1251"/do На груди висит бейдж, на котором написано: " .. rank .. "-" .. name)
