@@ -56,7 +56,7 @@ end
 
 --ОБНОВЛЕНИЕ--
 if not imgui.update then
-  imgui.update = { needupdate = false, updateText = "Нажмите на \"Проверить обновление\"", version = "beta 1.2.1" }
+  imgui.update = { needupdate = false, updateText = "Нажмите на \"Проверить обновление\"", version = "beta 1.0.0" }
 end
 ---------------------------
 	
@@ -410,12 +410,12 @@ else
             local data = json.decode(response.text) -- Предполагаем, что есть библиотека JSON
             if data and data.version and data.version ~= imgui.update.version then
                 imgui.update.needupdate = true
-                imgui.update.updateText = "Найдено обновление на версию " .. data.version
+                imgui.update.updateText = u8"Найдено обновление на версию " .. data.version
             else
-                imgui.update.updateText = "Обновлений не найдено"
+                imgui.update.updateText = u8"Обновлений не найдено"
             end
         else
-            imgui.update.updateText = "Ошибка " .. tostring(response.status_code)
+            imgui.update.updateText = u8"Ошибка " .. tostring(response.status_code)
         end
     end
 end
