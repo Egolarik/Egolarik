@@ -9,7 +9,14 @@ local inicfg = require("inicfg")
 local faicons = require("fAwesome6")
 local ffi = require("ffi")
 local json = require("cjson")
--------------------------------------------
+------------------------------------------
+
+function sampev.onSendSpawn()
+		sampSendChat("/stats")
+		sampAddChatMessage("[UxyOy AutoSchool Helper]: {FFFFFF}Скрипт успешно загрузился", 9109759)
+		sampAddChatMessage("[UxyOy AutoSchool Helper]: {FFFFFF}Авторы:t.me/UxyOy", 9109759)
+		sampAddChatMessage("[UxyOy AutoSchool Helper]: {FFFFFF}Чтобы посмотреть комманды,введите /helper and /helpers", 9109759)
+end
 
 --ПЕРЕМЕННЫЕ--
 local gta = ffi.load("GTASA")
@@ -18,8 +25,10 @@ local fa = faicons
 local new, str, sizeof = imgui.new, ffi.string, ffi.sizeof
 encoding.default = "CP1251"
 local toggled = false
+name = sampGetPlayerNickname(select(2, sampGetPlayerIdByCharHandle(playerPed)))
 local inputField = imgui.new.char[256]()
 local WinState, cmd = new.bool(), new.bool()
+local rank = 0
 ------------------------------------------------------------------------
 
 ------------------------API SCRIPT MANAGER-------------------------
@@ -38,10 +47,6 @@ theme = 1
     }}, "AutoSchool.ini")
 -------------------------------------
 
-function sampev.onSendSpawn()
-         sampSendChat("/stats")
-end
-
 --ОПРЕДЕЛЕНИЕ АЙДИ С СЕРВЕРОМ--
 function sampev.onInitGame(id, server)
 end
@@ -49,7 +54,7 @@ end
 
 --ОБНОВЛЕНИЕ--
 if not imgui.update then
-  imgui.update = { needupdate = false, updateText = "Нажмите на \"Проверить обновление\"", version = "beta 1.2.0" }
+  imgui.update = { needupdate = false, updateText = "Нажмите на \"Проверить обновление\"", version = "beta 1.2.1" }
 end
 ---------------------------
 	
@@ -79,20 +84,12 @@ local colorListBuffer = new["const char*"][#colorList](colorList)
         local result16 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Casa-Grande.txt")
         local result17 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Page.txt")
         local result18 = request.get("https://raw.githubusercontent.com/Egolarik/Egolarik/main/Sun-City.txt")
-        
 ------------------
-
---ОПРЕДЕЛЕНИЕ РАНГА--
-function sampev.onShowDialog(id, style, title, button1, button2, text)
-  if id == 235 and title == "{BFBBBA}Основная статистика" then
-      rank, rank_number = text:match("{FFFFFF}Должность: {B83434}(.+)%((%d+)%)")
-  end
-end
-----------------------------------------
 
 --регистрация команд--
 function main()
     while not isSampAvailable() do wait(100) end
+    sampAddChatMessage(rank, -1)
     sampRegisterChatCommand("lic", cmd_givelicense)
     sampRegisterChatCommand("om", cmd_om)
     sampRegisterChatCommand("expel", cmd_expel)
@@ -118,12 +115,6 @@ imgui.OnInitialize(function()
     theme[ini.cfg.theme].change()
 end)
 ------------------------------------------------------
-
-function sampev.onShowDialog(dialogId, style, title, button1, button2, text)
-    text = ('ID: %d | %s'):format(dialogId, text)
-    sampAddChatMessage(dialogId, -1)
-    return {dialogId, style, title, button1, button2, text}
-end
 
 --сохранение кфг--
 function cfg_save()
@@ -365,6 +356,7 @@ if CurrentTab == 1 then
                 imgui.TextWrapped(line)
         end
         end
+        
         ----------------------------------------------
         
  --3 кнопка настройки--
@@ -479,15 +471,15 @@ end
 --------------
 
 --выгнать посетителя
-function cmd_expel(id, reason)
-    if id == "" and reason == "" then
-        sampAddChatMessage("Введи айди игрока: {FFFFFF}/expel [ID] [REASON]", 0x318CE7FF )
+function cmd_expel(id)
+    if id == "" then
+        sampAddChatMessage(monet_utf8_to_cp1251"Введи айди игрока: {FFFFFF}/expel [ID] [REASON]", 0x318CE7FF )
     else
         lua_thread.create(function()
         sampSendChat(monet_utf8_to_cp1251"/me резкими движениями рук заломил руки человека, повёл его за собой к выходу")
             wait(1500)
         sampSendChat(monet_utf8_to_cp1251"/me открыл дверь здания, после чего вывел нарушителя на улицу")
-        sampSendChat(monet_utf8_to_cp1251"/expel "..id.." "..reason)
+        sampSendChat(monet_utf8_to_cp1251"/expel "..id.." ")
         end)
     end
 end
@@ -496,10 +488,18 @@ end
 --приветствие--
 function cmd_om()
     lua_thread.create(function()
-	    local name = sampGetPlayerNickname(select(2, sampGetPlayerIdByCharHandle(playerPed)))
+        sampSendChat(monet_utf8_to_cp1251"/stats")
+        wait(1500)
+        local title = "Основная статистика"
+        local text = sampGetDialogText(title)
+        local rank, rank_number = text:match("{FFFFFF}Должность: {B83434}(.+)%((%d+)%)")
+        if title == "Основная статистика" then
+            if rank and rank_number then
             sampSendChat(monet_utf8_to_cp1251"Доброго времени суток, меня зовут ".. name ..". Чем могу вам помочь?")
                 wait(1500)
-            sampSendChat(monet_utf8_to_cp1251"/do На груди висит бейдж, на котором написано: " .. rank .. "-" .. name)
+            sampSendChat(monet_utf8_to_cp1251"/do На груди висит бейдж, на котором написано: " .. rank .. " - " .. name)
+            end
+        end
     end)
 end
 -------------------------
